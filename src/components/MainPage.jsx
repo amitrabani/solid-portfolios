@@ -1,6 +1,5 @@
 import React from 'react';
 import MarketSummary from './MarketSummarry';
-// import UserPortfolio from './components/UserPortfolios';
 import UserPortfoliosContainer from '../containers/UserPortfoliosContainer';
 import ExchangeRates from './ExchangeRates';
 import PortfolioNewsContainer from '../containers/PortfolioNewsContainer';
@@ -10,13 +9,6 @@ import styled, { ThemeProvider } from 'styled-components'
 const Container = styled.div`
     display: 'flex';
     flex-flow: 'row wrap';
-    background: ${(props) => props.theme.primaryColor};
-    /* #0000008a */
-
-    *{
-
-
-    }
 `
 function MainPage() {
     return (
