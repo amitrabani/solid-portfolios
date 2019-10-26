@@ -3,60 +3,66 @@ import PortfolioChart from './PortfolioChart'
 import rightArrow from '../icons/right-arrow.svg'
 import leftArrow from '../icons/left-arrow.svg'
 import styled, { ThemeProvider } from 'styled-components'
-// import Button from '../elements/Button';
-const theme = {
-    primary: 'teal',
-    secondary: 'green',
-    font: 'sans-serif'
-}
+import Theme from '../elements/Theme';
 
 const Container = styled.div`
-        display: flex;
-        align-items: center;
-`
 
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+`
+const ButtonsContainer = styled.div`
+    width: min-content;
+`
 const Button = styled.button`
-    color:#0081f2;
-    width: 30px;
-    height: 100px;
-    // background-color: ${(props) => props.theme.primary};
-    background-color: white;
+background-color: transparent;
     border-color: transparent;
+    outline-color: #03dac56b;
+    outline-width: thick;
     &:hover{
         background-color:#e0f0ff;
     }
     &:disabled {
         opacity: 0.3;
     }`
-const LeftButton = styled(Button)` 
-border-style: solid;
-border-color: rgb(224, 228, 233);
-border-width: 0px 1px 0px 0px; 
-`
-const RightButton = styled(Button)` 
-border-style: solid;
-border-color: rgb(224, 228, 233);
-border-width: 0px 0px 0px 1px;
-`
-const Ul = styled.ul`
-        list-style-type: none;
-        margin-top: 10px;
-        width:90%;
-        display: flex;
-        /* transition-property: transform;
-        transition-duration: 300ms;
-        transition-timing-function: ease;
-        transition-delay: 0s;
-        transform: translateX(0%); */
-        li{
-    width: 20%;
+const Ul = styled.ol`
+list-style-type: none;
+margin-top: 10px;
+margin-bottom: 40px;
+width: 100%;
+display: flex;
+overflow-y: hidden;
+scroll-behavior: smooth;
+height: 300px;
+align-items: center;
+&&::-webkit-scrollbar {
+width: 4px;
+height: 10px;
+}
+&&::-webkit-scrollbar-thumb {
+background-color: #00a8956b;
+outline: 1px solid slategrey;
+width: 100px;
+}
+
+&&::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+width: 200px;
+}
+  li{
+    height: 220px;
     border-style: solid;
     border-color: #e0e4e9;
     border-top-width: 0px;
     border-bottom-width: 0px;
     border-left-width: 0px;
-    border-right-width: 1px;}`
-
+    border-right-width: 1px;
+    text-transform: uppercase;
+}
+`
 const TopText = styled.h3`
     color: #0081f2;
     font-weight: 600;
@@ -71,16 +77,6 @@ const ButtomText = styled.h5`
     font-weight: 600;
     margin-top: 0px;
 `
-const styles = {
-    ul: {
-        transitionProperty: 'transform',
-        transitionDuration: '300ms',
-        transitionTimingFunction: 'ease',
-        transitionDelay: '0s',
-        transform: 'translateX(0%)',
-    }
-}
-
 
 class UserPortfolio extends React.Component {
     constructor(props) {
@@ -94,48 +90,44 @@ class UserPortfolio extends React.Component {
 
     }
     moveNext() {
-        this.setState({ selectedIndex: this.state.selectedIndex + 1 })
+        this.refs.listScroll.scrollLeft += 220
+        if (
+            this.refs.listScroll.scrollLeft + this.refs.listScroll.clientWidth >=
+            this.refs.listScroll.scrollWidth - 1
+        ) {
+            this.refs.listScroll.scrollLeft = 10
+        }
     }
     movePrevious() {
-        this.setState({ selectedIndex: this.state.selectedIndex - 1 })
-    }
+        this.refs.listScroll.scrollLeft -= 220
+        if (
+            this.refs.listScroll.scrollLeft === 0
+          ) {
+            this.refs.listScroll.scrollLeft = this.refs.listScroll.scrollWidth
 
+          }     }
 
-    generateNewPortfoliosObject() {
-        let newPortfolios = []
-        let tabsNumber = Math.ceil(this.props.portfolios.length / 6)
-        for (let index = 0; index < tabsNumber; index++) {
-            newPortfolios.push(this.props.portfolios.splice(0, 6))
-        }
-        this.setState({ portfolios: newPortfolios })
-
-    }
-
-    componentWillMount() {
-        this.generateNewPortfoliosObject()
-
-    }
-    render(props) {
+    render() {
         return (
-            <ThemeProvider theme={theme}>
+            <ThemeProvider theme={Theme}>
                 <Container>
-                    <Ul style={styles.ul}>
-                        {this.state.portfolios[this.state.selectedIndex].map(portfolio => {
-                            return <li>
+                    <Ul ref={"listScroll"}>
+                        {this.state.portfolios.map(portfolio => {
+                            return <li key={portfolio[0].portfolioTitle} >
                                 <PortfolioChart portfolio={portfolio} />
                             </li>
                         }
                         )
                         }
                     </Ul>
-                    <div>
-                        <LeftButton type="submit" onClick={this.movePrevious} disabled={this.state.selectedIndex <= 0} >
-                            <img src={leftArrow}></img>
-                        </LeftButton>
-                        <RightButton type="submit" onClick={this.moveNext} disabled={this.state.selectedIndex >= this.state.portfolios.length - 1}>
-                            <img src={rightArrow}></img>
-                        </RightButton>
-                    </div>
+                    <ButtonsContainer>
+                        <Button type="submit" onClick={this.movePrevious} >
+                            <img height="50px" src={leftArrow}></img>
+                        </Button>
+                        <Button type="submit" onClick={this.moveNext} >
+                            <img height="50px" src={rightArrow}></img>
+                        </Button>
+                    </ButtonsContainer>
                 </Container>
             </ThemeProvider>
         )
