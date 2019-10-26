@@ -1,11 +1,44 @@
 import React from "react"
 import styled, { ThemeProvider } from 'styled-components'
-import { relative } from "path";
+import Theme from '../elements/Theme';
 
-// const CardsContainer = styled.div`
-//     border: 1px solid #C6CDD5;
+const RatesTable = styled.table`
+ border-spacing: 10px;
+  display: flex;
+  border-width:2px;
+  border-style: solid;
+  border-color: #80808059;
+  border-radius: 10px;
+  width: fit-content;
+  tbody{
+      border-left-width:3px;
+      border-left-style: solid;
+      border-left-color: ${(props) => props.theme.primaryColor};
+  }
+`
+const Currency = styled.td`
+    color: ${(props) => props.theme.primaryColor};
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 8px; 
+    background-color: #d3d3d361;
+  `
+const CurrencyPrice = styled.td`
+   color: #51575d;
+   font-weight: 500;
+   padding: 10px;
+   border-left-style:solid;
+   border-left-width: 2px;
+   border-left-color:rgba(167, 169, 172, 0.49);
+ `
 
-// `
+const Header = styled.h2`
+    color: ${(props) => props.theme.secondaryColor};
+    text-align:left;
+    margin-top: 35px;
+	margin-bottom: 5px;
+	font-family: Arial, Helvetica, sans-serif;
+`
 
 const rates = {
     "CAD": 1.565,
@@ -15,84 +48,44 @@ const rates = {
     "EUR": 1.092,
     "USD": 1.2234,
 }
-class PortfolioNews extends React.Component {
+
+class ExchangeRates extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            last: [],
-            tableCounter: 0
-        }
     }
-    seperateRates() {
-        var ratesArray = []
-        this.seperateRatesAraay = []
-        let currencyObject = {}
-        let tabsNumber = 2
-
-        Object.keys(rates).forEach(currency => {
-            ratesArray.push({ [currency]: rates[currency] })
-        })
-        for (let i = 0; i < tabsNumber; i++) {
-            this.seperateRatesAraay.push(ratesArray.splice(0, 3))
-
-        }
-        this.setState({ last: this.seperateRatesAraay })
-    }
-    componentDidMount() {
-        this.seperateRates()
-
+    renderTableData(currency) {
+        return (<tr key={currency}>
+            <Currency>{currency}</Currency>
+            <CurrencyPrice>{rates[currency].toFixed(4)}</CurrencyPrice>
+        </tr>)
     }
     render(props) {
-        // console.log(this.state.last[this.state.tableCounter])
-        if (this.state.last[this.state.tableCounter] != undefined) {
-            return (
+        let ratesObjectLength = Object.keys(rates).length
+        let ratesObjectArray = Object.keys(rates)
+        return (
+            <ThemeProvider theme={Theme}>
                 <div>
-                    <table style={{ borderLeft: "4px solid #0081f2", borderSpacing: '10px', display: 'flex' }}>
+                    <Header>CURRENCIES</Header>
+                    <RatesTable>
                         <tbody>
-                            {this.state.last[this.state.tableCounter].map(currency => {
-                                return <tr>
-                                    <th style={{ color: '#0081f2', fontVariant: 'bold', fontWeight: 700, padding: '10px' }}>{Object.keys(currency)}</th>
-                                    <td style={{ color: '#51575d', fontVariant: 'bold', borderLeft: '2px solid rgb(167, 169, 172)' }} >{rates[Object.keys(currency)].toFixed(4)}</td>
-                                </tr>
-                            })
-                            }
+                            {ratesObjectArray.splice(ratesObjectLength / 2).map(currency => {
+                                return (
+                                    this.renderTableData(currency)
+                                )
+                            })}
                         </tbody>
-                        {/* <div> */}
-                 
-                        {/* </div> */}
-                    </table>
+                        <tbody>
+                            {ratesObjectArray.map(currency => {
+                                return (
+                                    this.renderTableData(currency)
+
+                                )
+                            })}
+                        </tbody>
+                    </RatesTable>
                 </div>
-            )
-
-        }
-        return <h1>progress</h1>
-
+            </ThemeProvider>
+        )
     }
 }
-export default PortfolioNews
-
-
-
-
-                    // <table style={{ borderLeft: "4px solid #0081f2", borderSpacing: '10px', display: 'flex' }}>
-                    //     <tbody>
-                    //         {this.state.last[this.state.tableCounter].map(currency => {
-                    //             return <tr>
-                    //                 <th style={{ color: '#0081f2', fontVariant: 'bold', fontWeight: 700, padding: '10px' }}>{Object.keys(currency)}</th>
-                    //                 <td style={{ color: '#51575d', fontVariant: 'bold', borderLeft: '2px solid rgb(167, 169, 172)' }} >{rates[Object.keys(currency)].toFixed(4)}</td>
-                    //             </tr>
-                    //         })
-                    //         }
-                    //     </tbody>
-                    //     {/* <div> */}
-                    //     <tbody>
-                    //         {this.state.last[1].map(currency => {
-                    //             return <tr>
-                    //                 <th style={{ color: '#0081f2', fontVariant: 'bold', fontWeight: 700, padding: '10px' }}>{Object.keys(currency)}</th>
-                    //                 <td style={{ color: '#51575d', fontVariant: 'bold', borderLeft: '2px solid rgb(167, 169, 172)' }} >{rates[Object.keys(currency)].toFixed(4)}</td>
-                    //             </tr>
-                    //         })
-                    //         }
-                    //     </tbody>
-                    //     {/* </div> */}
-                    // </table>
+export default ExchangeRates
