@@ -1,7 +1,9 @@
 
 .App {
   text-align: center;
-  background: radial-gradient(#00a89545, transparent);
+  overflow: auto auto;
+  /* background: radial-gradient(#00a89545, transparent); */
+  background: radial-gradient(#1b0089, #282c34de);
 }
 
 .App-logo {
