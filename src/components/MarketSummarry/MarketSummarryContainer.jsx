@@ -1,5 +1,5 @@
 import React from 'react'
-import MarketSummarry from './MarketSummarry.js'
+import MarketSummarry from './MarketSummarry.jsx'
 
 const stocks = {
     "bestMatches": [
