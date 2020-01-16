@@ -3,7 +3,7 @@ import Theme from "../../elements/Theme";
 
 export const RatesTable = styled.table`
   width: 100%;
-  border-spacing: 10px;
+  border-spacing:8px;
   display: flex;
   border-width: 2px;
   border-style: solid;
@@ -11,8 +11,15 @@ export const RatesTable = styled.table`
   border-radius: 10px;
   tbody {
     border-left-width: 3px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     border-left-style: solid;
     border-left-color: ${props => props.theme.primaryColor};
+  }
+  tr{
+    margin: 1px;  
+    letter-spacing: 1px;
   }
 `;
 export const Currency = styled.td`
