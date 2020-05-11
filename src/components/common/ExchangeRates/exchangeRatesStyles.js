@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import Theme from "../../../elements/Theme";
+import styled from 'styled-components';
+
+import Theme from '../../../elements/Theme';
 
 export const RatesTable = styled.table`
   width: 100%;
@@ -15,7 +16,7 @@ export const RatesTable = styled.table`
     flex-wrap: wrap;
     justify-content: space-around;
     border-left-style: solid;
-    border-left-color: ${props => props.theme.primaryColor};
+    border-left-color: ${(props) => props.theme.primaryColor};
   }
   tr {
     margin: 1px;
@@ -23,7 +24,7 @@ export const RatesTable = styled.table`
   }
 `;
 export const Currency = styled.td`
-  color: ${props => props.theme.primaryColor};
+  color: ${(props) => props.theme.primaryColor};
   font-weight: 700;
   padding: 10px;
   border-radius: 8px;
