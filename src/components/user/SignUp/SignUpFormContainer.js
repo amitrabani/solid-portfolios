@@ -1,17 +1,13 @@
-import { connect } from "react-redux";
-import SignUpForm from "./SignUpForm";
-import {signUp} from "../../../redux/actions/auth/authActionCreators"
-const mapStateToProps = state => {
-  return {
-    auth: state.auth,
-    authError: state.auth.authError
-  };
-};
+import { connect } from 'react-redux';
 
-const mapDispatchToProps = dispatch => {
-  return {
-    signUp: creds => dispatch(signUp(creds))
-  };
-};
+import { signUp } from '../../../redux/actions/auth/authActionCreators';
+import { getAuth } from '../../../redux/selectors';
+import SignUpForm from './SignUpForm';
+
+const mapStateToProps = (state) => ({
+  auth: getAuth(state),
+});
+
+const mapDispatchToProps = { signUp };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
