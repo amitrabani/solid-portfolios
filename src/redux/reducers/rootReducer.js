@@ -1,12 +1,12 @@
-import { combineReducers } from "redux";
-import { FetchPortfolios } from "./portfoliosReducer";
-import { ToggleFetchingPortfolios } from "./portfoliosReducer";
-import authReducer from "./authReducer";
-import { firebaseReducer } from "react-redux-firebase";
+import { combineReducers } from 'redux';
+
+import authReducer from './authReducer';
+import marketReducer from './marketReducer';
+import portfoliosReducer from './portfoliosReducer';
+
 
 export default combineReducers({
   auth: authReducer,
-  firebaseReducer: firebaseReducer,
-  portfolios: FetchPortfolios,
-  isPortfoliosFetching: ToggleFetchingPortfolios
+  portfolios: portfoliosReducer,
+  market: marketReducer,
 });
