@@ -1,53 +1,63 @@
 import {
-  SIGNIN_SUCCESS,
   SIGNIN_ERROR,
+  SIGNIN_SUCCESS,
+  SIGNOUT_SUCCESS,
   SIGNUP_ERROR,
   SIGNUP_SUCCESS,
-  SIGNOUT_ERROR,
-  SIGNOUT_SUCCESS
-} from "../actions/actionTypes";
+  START_AUTHENTICATION,
+} from '../actions/actionTypes';
 
-const initState = {
-  authError: null
+const initialState = {
+  authError: null,
+  loggedIn: false,
+  uid: null,
+  isAuthenticating: false,
 };
-const authReducer = (state = initState, action) => {
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case START_AUTHENTICATION:
+      return { ...state, isAuthenticating: true };
+
     case SIGNIN_ERROR:
-      console.log("Sign In error");
       return {
         ...state,
-        authError: `Sign In failed ${action.err}`
+        authError: action.error,
+        isAuthenticating: false,
       };
+
     case SIGNIN_SUCCESS:
-      console.log("Login Success");
-      console.log(action);
       return {
         ...state,
         authError: null,
         loggedIn: true,
-        uid: action.payload
+        uid: action.payload,
+        isAuthenticating: false,
       };
 
     case SIGNOUT_SUCCESS:
-      console.log("signout success");
-      return { ...state, authError: null, loggedIn: false, uid: null };
+      return {
+        ...state,
+        authError: null,
+        loggedIn: false,
+        uid: null,
+      };
 
     case SIGNUP_SUCCESS:
-      console.log("Signup Success");
-
       return {
         ...state,
         authError: null,
         loggedIn: true,
-        uid: action.payload
+        uid: action.payload,
+        isAuthenticating: false,
       };
 
     case SIGNUP_ERROR:
-      console.log("signup error");
       return {
         ...state,
-        authError: `Sign Up failed ${action.err}`
+        authError: action.error,
+        isAuthenticating: false,
       };
+
     default:
       return state;
   }

@@ -1,121 +1,59 @@
-import firebaseApp from "../../../components/Firebase/firebase";
 import {
-  firestore,
-  googleProvider
-} from "../../../components/Firebase/firebase";
-// import {
-//     SIGNIN_SUCCESS,
-//     SIGNIN_ERROR,
-//     SIGNUP_ERROR,
-//     SIGNUP_SUCCESS,
-//     SIGNOUT_ERROR,
-//     SIGNOUT_SUCCESS
-//   } from "../actionTypes";
+  addGoogleUserToFirestore,
+  addUserToFirestore,
+  getCurrentUser,
+  signInWithFirebase,
+  signOutWithFirebase,
+} from '../../../firebase/firestoreDB';
+import {
+  SIGNIN_ERROR,
+  SIGNUP_ERROR,
+  SIGNOUT_SUCCESS,
+  START_AUTHENTICATION,
+} from '../actionTypes';
+import { setActionStatus, setError } from '../commonActions';
+import { resetPortfolios } from '../portfolios/portfoliosActions';
 import {
   setUserSignedInSuccess,
-  setUserSignedInError,
-  setUserSignedUpError,
   setUserSignedUpSuccess,
-  setUserSignedOutError,
-  setUserSignedOutSuccess
-} from "../auth/authActions";
+} from './authActions';
 
-export const signIn = (email, password) => {
-  return dispatch => {
-    firebaseApp
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(dataBeforeEmail => {
-        firebaseApp.auth().onAuthStateChanged(function(user) {
-          localStorage.setItem("uid", user.uid);
-          dispatch(setUserSignedInSuccess(user.uid));
-        });
-      })
-      // .then(() => {
-      //   firebaseApp.onAuthUserListener()
-      // })
-      .catch(err => {
-        dispatch(setUserSignedInError(err));
-      });
-  };
+export const signIn = (email, password) => (dispatch) => {
+  dispatch(setActionStatus(START_AUTHENTICATION));
+  signInWithFirebase(email, password)
+    .then(() => dispatch(setUserSignedInSuccess(getCurrentUser().uid)))
+    .catch((error) => {
+      dispatch(setError(SIGNIN_ERROR, error.message));
+    });
 };
 
-// .catch(error => {
-//   if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
-//       error.message = ERROR_MSG_ACCOUNT_EXISTS;
-//     }
-//   this.setState({ error });
-// });
-
-export const signOut = () => async dispatch => {
-  firebaseApp
-    .auth()
-    .signOut()
+export const signOut = () => (dispatch) => {
+  signOutWithFirebase()
+    .then(() => dispatch(setActionStatus(SIGNOUT_SUCCESS)))
     .then(() => {
-      firebaseApp.auth().onAuthStateChanged(function(user) {
-        localStorage.removeItem("uid");
-        dispatch(setUserSignedOutSuccess());
-      });
+      dispatch(resetPortfolios());
     })
     .catch(() => {
       // dispatch(setUserSignedOutError());
     });
 };
 
-export const signUpWithGoogle = () => {
-  return dispatch => {
-    firebaseApp
-      .auth()
-      .signInWithPopup(googleProvider)
-      .then(socialAuthUser => {
-        const user = socialAuthUser.additionalUserInfo.profile;
-        firestore
-          .collection("users")
-          .doc(socialAuthUser.user.uid)
-          .set({
-            firstName: user.given_name,
-            lastName: user.family_name,
-            initials: user.given_name[0] + user.family_name[0],
-            subscription: false
-          });
-      })
-      .then(data => {
-        firebaseApp.auth().onAuthStateChanged(function(user) {
-          console.log(user)
-          localStorage.setItem("uid", user.uid);
-          dispatch(setUserSignedUpSuccess(user.uid));
-        });
-      })
-      .catch(err => {
-        dispatch(setUserSignedUpError(err));
-      });
-  };
+export const signUpWithGoogle = () => (dispatch) => {
+  dispatch(setActionStatus(START_AUTHENTICATION));
+  addGoogleUserToFirestore()
+    .then(() => {
+      dispatch(setUserSignedUpSuccess(getCurrentUser().uid));
+    })
+    .catch((error) => {
+      dispatch(setError(SIGNUP_ERROR, error.message));
+    });
 };
 
-export const signUp = newUser => {
-  return dispatch => {
-    firebaseApp
-      .auth()
-      .createUserWithEmailAndPassword(newUser.email, newUser.passwordOne)
-      .then(resp => {
-        return firestore
-          .collection("users")
-          .doc(resp.user.uid)
-          .set({
-            firstName: newUser.firstName,
-            lastName: newUser.lastName,
-            initials: newUser.firstName[0] + newUser.lastName[0],
-            subscription: false
-          });
-      })
-      .then(data => {
-        firebaseApp.auth().onAuthStateChanged(function(user) {
-          localStorage.setItem( "uid",user.uid);
-          dispatch(setUserSignedUpSuccess(user.uid));
-        });
-      })
-      .catch(err => {
-        dispatch(setUserSignedUpError(err));
-      });
-  };
+export const signUp = (newUser) => (dispatch) => {
+  dispatch(setActionStatus(START_AUTHENTICATION));
+  addUserToFirestore(newUser)
+    .then(() => dispatch(setUserSignedUpSuccess(getCurrentUser().uid)))
+    .catch((error) => {
+      dispatch(setError(SIGNUP_ERROR, error.message));
+    });
 };
