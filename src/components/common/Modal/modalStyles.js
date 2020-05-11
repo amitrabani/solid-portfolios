@@ -1,40 +1,51 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const Container = styled.div`
-  overflow: auto;
+export const ModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 111;
+  :not(Container) {
+    background-color: #00000069;
+  }
+  @media (max-width: 768px) {
+    div {
+      width: 100%;
+      height: 100%;
+    }
+  }
+`;
+
+export const ModalContent = styled.div`
   margin: auto;
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  border: solid black;
-  z-index: 1;
-  background: white;
-  height: 70%;
-  width: 50%;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  z-index: 100;
+  background: #bdbdbd;
+  height: fit-content;
+  width: fit-content;
+  padding: 2.5em;
+  div {
+    /* display: flex; */
+  }
+
   /* min-width */
-  form {
+  /* form {
     display: flex;
     flex-direction: column;
-  }
-  div {
-    display: flex;
-    position: relative;
-  }
-  input {
-    font-size: 14px;
-    font-size: 0.82353rem;
-    height: 35px;
-    height: 2.05882rem;
-    margin: 0;
-    padding: 0;
-  }
-  label {
+  } */
+  /* label {
     cursor: pointer;
     display: block;
     font-weight: 400;
     font-size: 1.125rem;
     line-height: 1.4;
-  }
+  }  */
 `;
