@@ -1,4 +1,3 @@
-// import firebaseApp, { googleProvider } from "./firebase";
 import firebaseApp from '../../node_modules/firebase/app';
 import '../../node_modules/firebase/auth';
 import '../../node_modules/firebase/firestore';
