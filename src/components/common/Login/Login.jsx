@@ -1,23 +1,34 @@
-import React, { useState } from "react";
-import { Button } from "./LoginStyles";
-import Modal from "../Modal/Modal";
+import React, { useState } from 'react';
+
+import LoginManagement from '../../user/LoginManagement/LoginManagement';
+import Modal from '../Modal/Modal';
+import { Button } from './LoginStyles';
 
 const Login = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleModalClose = () => {
-    setModalOpen(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const toggleModalOpen = () => {
+    setModalOpen(!isModalOpen);
   };
-  const handleModalOpen = () => {
-    setModalOpen(true);
-  };
+
   return (
     <>
       <Button>
-        <a onClick={handleModalOpen}>Login</a>
+        <div onClick={toggleModalOpen}>Login</div>
       </Button>
-      <Modal isOpen={modalOpen} onClose={handleModalClose} />
+      <div style={{ height: '70%', width: '50%' }}>
+        {isModalOpen && (
+          <Modal
+            id="sdfsvs"
+            open={isModalOpen}
+            style={{ backgroundColor: '£fcc117e3' }}
+            onClose={toggleModalOpen}
+          >
+            <LoginManagement />
+          </Modal>
+        )}
+      </div>
     </>
   );
 };
-console.log("put login button in navbar with modal hook")
 export default Login;
