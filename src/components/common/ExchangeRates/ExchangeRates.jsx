@@ -1,5 +1,11 @@
-import React from "react";
-import { RatesTable, Currency, Header, CurrencyPrice } from "./exchangeRatesStyles";
+import React from 'react';
+
+import {
+  Currency,
+  CurrencyPrice,
+  Header,
+  RatesTable,
+} from './exchangeRatesStyles';
 
 const rates = {
   CAD: 1.565,
@@ -7,7 +13,7 @@ const rates = {
   GBP: 0.87295,
   SEK: 1.2983,
   EUR: 1.092,
-  USD: 1.2234
+  USD: 1.2234,
 };
 
 const ExchangeRates = () => {
@@ -17,7 +23,7 @@ const ExchangeRates = () => {
       <Header>CURRENCIES</Header>
       <RatesTable>
         <tbody>
-          {ratesObjectArray.map(currency => (
+          {ratesObjectArray.map((currency) => (
             <tr key={currency}>
               <Currency>{currency}</Currency>
               <CurrencyPrice>{rates[currency].toFixed(3)}</CurrencyPrice>
