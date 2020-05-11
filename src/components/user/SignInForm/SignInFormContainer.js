@@ -1,20 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { signIn, signUpWithGoogle } from "../../../redux/actions/auth/authActionCreators";
-import SignInForm from "./SignInForm";
+import { connect } from 'react-redux';
 
-const mapStateToProps = state => {
-  return {
-    authError: state.auth.authError,
-    auth: state.firebaseReducer.auth
-  };
-};
+import {
+  signIn,
+  signUpWithGoogle,
+} from '../../../redux/actions/auth/authActionCreators';
+import { getAuth } from '../../../redux/selectors';
+import SignInForm from './SignInForm';
 
-const mapDispatchToProps = dispatch => {
-  return {
-    signIn: (email, password) => dispatch(signIn(email, password)),
-    signInGoogle: () => dispatch(signUpWithGoogle())
-  };
-};
+const mapStateToProps = (state) => ({
+  auth: getAuth(state),
+});
+
+const mapDispatchToProps = { signIn, signUpWithGoogle };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInForm);
