@@ -1,32 +1,32 @@
-import { useState, useEffect, useRef } from "react";
+/* eslint-disable linebreak-style */
+import { useState, useEffect, useRef } from 'react';
 
-function useComponentVisible(initialIsVisible) {
+export default (initialIsVisible) => {
   const [isComponentVisible, setIsComponentVisible] = useState(
-    initialIsVisible
+    initialIsVisible,
   );
   const ref = useRef(null);
 
-  const handleHideComponent = (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
+  const handleHideComponent = (event) => {
+    if (event.key === 'Escape') {
       setIsComponentVisible(false);
     }
   };
 
-  const handleClickOutside = event => {
+  const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target)) {
       setIsComponentVisible(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("keydown", handleHideComponent, true);
-    document.addEventListener("click", handleClickOutside, true);
+    document.addEventListener('keydown', handleHideComponent, true);
+    document.addEventListener('click', handleClickOutside, true);
     return () => {
-      document.removeEventListener("keydown", handleHideComponent, true);
-      document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener('keydown', handleHideComponent, true);
+      document.removeEventListener('click', handleClickOutside, true);
     };
   });
 
   return { ref, isComponentVisible, setIsComponentVisible };
-}
-export default useComponentVisible;
+};
