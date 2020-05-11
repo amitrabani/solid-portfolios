@@ -1,18 +1,10 @@
-import {
-  FETCH_PORTFOLIOS,
-  SET_FETCHING,
-  DONE_FETCHING
-} from "../actionTypes";
+import { FETCH_PORTFOLIOS } from '../actionTypes';
 
-export const fetchPortfoliosAction = portfolios => ({
+export const fetchPortfoliosAction = (portfolios) => ({
   type: FETCH_PORTFOLIOS,
-  payload: portfolios
+  payload: portfolios,
 });
-export const setFetching = () => ({
-  type: SET_FETCHING,
-  payload: true
-});
-export const doneFetching = () => ({
-  type: DONE_FETCHING,
-  payload: false
+
+export const resetPortfolios = () => ({
+  type: 'RESET_PORTFOLIOS',
 });
