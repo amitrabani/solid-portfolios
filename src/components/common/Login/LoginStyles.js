@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import Theme from "../../../elements/Theme";
+import styled from 'styled-components';
+
+import Theme from '../../../elements/Theme';
 
 export const Container = styled.div`
   justify-content: flex-end;
@@ -8,7 +9,7 @@ export const Container = styled.div`
 `;
 
 export const Button = styled.div`
-  margin: auto 5em;
+  margin: auto 2em;
   color: ${Theme.primaryColor};
   padding: 0 0.5em;
   font-size: 1rem;
