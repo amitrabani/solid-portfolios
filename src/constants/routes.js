@@ -1,8 +1,7 @@
 export const LANDING = '/';
-export const HOME = '/home';
 export const ACCOUNT = '/account';
 // export const ADMIN = '/admin';
-export const PORTFOLIOS = '/portfolio'
-export const BLOG = '/blog'
-export const ABOUT = '/about'
-
+export const PORTFOLIO_MANAGEMENT = '/portfolios/:id';
+export const PORTFOLIOS = '/portfolios';
+export const BLOG = '/blog';
+export const ABOUT = '/about';
