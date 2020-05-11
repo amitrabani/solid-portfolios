@@ -1,34 +1,39 @@
-import styled from "styled-components";
-import Theme from "../../../../elements/Theme";
+import styled from 'styled-components';
+
+import Theme from '../../../../elements/Theme';
 
 export const Container = styled.div`
-  /* background-color:white  */
-  width: 200px;
+  width: 9em;
+  position: relative;
   h2 {
     font-family: ${Theme.fonts.primaryFontFamily};
     color: ${Theme.primaryColor};
   }
 `;
+
 export const List = styled.ul`
+  position: absolute;
   padding: 7px;
   margin: 0;
   width: -webkit-fill-available;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 10px;
-  background: transparent;
   appearance: none;
   cursor: pointer;
   list-style-type: none;
-
+  z-index: 1;
+  background-color: ${Theme.secondaryColor};
+  box-shadow: inset 0px 2px 3px 0px rgba(153, 147, 147, 0.25);
   li {
-    background-color: #ffffff40;
-    color: #fcc117e3;
     padding: 0.5em;
-    font-weight: 800;
-    :hover{
-        background-color:#1f1b2429;
+    :hover {
+      background-color: #ffffff85;
     }
+  }
+  .link {
+    color: #fcc117e3;
+    font-weight: 800;
   }
 `;
 
@@ -38,7 +43,6 @@ export const Button = styled.button`
   outline-color: #03dac56b;
   outline-width: thick;
   border-radius: 139px;
-  border: 3px solid #ffffff5c;
   opacity: 0.8;
   width: 70px;
   height: 70px;
