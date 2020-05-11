@@ -1,17 +1,9 @@
-import { connect } from "react-redux";
-// import Navbar from "./Navbar";
+import { connect } from 'react-redux';
 
-import { signOut } from "../../../../redux/actions/auth/authActionCreators";
-import UserDropdown from "./UserDropdown";
+import { signOut } from '../../../../redux/actions/auth/authActionCreators';
+import UserDropdown from './UserDropdown';
 
-const mapDispatchToProps = dispatch => {
-  return {
-    signOut: () => dispatch(signOut())
-  };
-};
 
-function mapStateToProps(state) {
-  console.log(state);
-}
+const mapDispatchToProps = { signOut };
 
 export default connect(null, mapDispatchToProps)(UserDropdown);
