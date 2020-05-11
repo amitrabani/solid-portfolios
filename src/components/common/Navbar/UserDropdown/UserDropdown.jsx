@@ -1,49 +1,65 @@
-import React, { useState, useEffect } from "react";
-import LeftArrow from "../../../../icons/LeftArrow";
-import PropTypes from "prop-types";
-import Theme from "../../../../elements/Theme";
-import { Link } from "react-router-dom";
-import { ACCOUNT } from "../../../../constants/routes";
-import useComponentVisible from "../../../../hooks/useComponentVisable";
-import { Container, List, Button } from "./userDropDownStyle";
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+import { ACCOUNT, LANDING } from '../../../../constants/routes';
+import useComponentVisible from '../../../../hooks/useComponentVisable';
+import userIcon from '../../../../icons/userIcon.svg';
+import { Button, Container, List } from './userDropDownStyle';
+
 
 const UserDropdown = (props) => {
+  const { signOut } = props;
   const {
     ref,
     isComponentVisible,
     setIsComponentVisible,
   } = useComponentVisible(false);
 
-  const [isOpen, setOpen] = useState(false);
+  // useEffect(() => {
+  // setIsComponentVisible(isOpen);
+  // }, [isOpen]);
 
   const toggleOpen = () => {
-    setOpen(!isOpen);
-    // setIsComponentVisible(true);
+    setIsComponentVisible(!isComponentVisible);
   };
 
   const handleSignOut = () => {
-    console.log(props);
-    props.signOut();
+    signOut();
   };
-  useEffect(() => {
-    setIsComponentVisible(isOpen);
-  }, [isOpen]);
+
 
   return (
     <Container>
       <Button type="submit" onClick={toggleOpen}>
-        <LeftArrow width="50" height="50" color={Theme.primaryColor} />
+        <img alt="user" src={userIcon} />
       </Button>
 
       {isComponentVisible && (
         <List ref={ref}>
           <li>
-            {/* Account */}
-            <Link to={ACCOUNT}>account</Link>
+            <Link
+              onClick={() => setIsComponentVisible(false)}
+              className="link"
+              to={ACCOUNT}
+            >
+              Account
+            </Link>
           </li>
-          <li>Write an Article</li>
-          <li onClick={handleSignOut}>
-            <a>Sign Out </a>
+          <li>
+            <Link
+              onClick={() => setIsComponentVisible(false)}
+              className="link"
+              to={ACCOUNT}
+            >
+              Write an Article
+            </Link>
+          </li>
+          <li>
+            <Link onClick={handleSignOut} className="link" to={LANDING}>
+              Sign Out
+            </Link>
           </li>
         </List>
       )}
@@ -51,9 +67,8 @@ const UserDropdown = (props) => {
   );
 };
 
-export default UserDropdown;
-
 UserDropdown.propTypes = {
-  title: PropTypes.string,
-  list: PropTypes.array,
+  signOut: PropTypes.func.isRequired,
 };
+
+export default UserDropdown;
