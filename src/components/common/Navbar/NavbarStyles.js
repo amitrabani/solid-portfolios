@@ -1,13 +1,21 @@
-import styled from "styled-components";
-import Theme from "../../../elements/Theme";
+import styled from 'styled-components';
 
-export const Nav = styled.div`
-  display: flex;
-  width:100%
+import ButtonStyles from '../../../elements/ButtonStyles';
+import Theme from '../../../elements/Theme';
+
+export const AppHeader = styled.div`
+  overflow-y: hidden;
+  color: ${Theme.dataColor};
+  margin: 1em;
 `;
 
-export const Container = styled.div`
-  background-color: #d5d3cd3b;
+export const LinksContainer = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+export const Container = styled.nav`
+  background-color: ${Theme.navColor};
   display: flex;
   justify-content: space-between;
   margin-right: 20px;
@@ -15,34 +23,44 @@ export const Container = styled.div`
   height: 15%;
   min-height: 108px;
   overflow: visible;
-  h1 {
-    color: white;
+  color: ${Theme.secondaryColor};
+  .navItem {
+    display: flex;
+    align-items: center;
   }
-  h3 {
-    margin-left: 60px;
-    color: white;
-  }
+  .removable {
+      display: contents;
+    }
+    
   @media (max-width: 730px) {
-    navItem {
-      background: white;
+    display: flex;
+    flex-direction: column;
+    .navItem {
+      /* position: absolute; */
+      ul {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        li {
+          width: 100%;
+          text-align: center;
+          padding: 0.7em;
+        }
+      }
+    }
+
+    .removable {
       display: none;
     }
   }
 `;
-/* 
-// @media (max-width: 768px) {
-//   .App{
-//     display: flex;
-//     flex-direction: column;
-// justify-content: center;
-// /* align-items: center; */
-/* //   } */
-/* //   } */
 
 export const List = styled.ul`
   display: flex;
   list-style: none;
   width: min-content;
+  align-items: center;
+  /* position:relative; */
   padding: 0;
   :hover li a {
     opacity: 0.5;
@@ -58,4 +76,10 @@ export const List = styled.ul`
       border-bottom: 3px solid white;
     }
   }
+`;
+
+export const SettingsButton = styled.button`
+  ${ButtonStyles};
+  width: 100%;
+  height: 100%;
 `;
