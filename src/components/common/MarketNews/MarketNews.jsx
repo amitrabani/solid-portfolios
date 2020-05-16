@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
 
-import PropTypes from 'prop-types';
+import PropTypes, { object } from 'prop-types';
 
-import WithLoading from '../../../HOCs/WithLoading';
 import {
   Card, CardBottom, CardImg, CardsContainer,
 } from './marketNewsStyles';
 
 const MarketNews = (props) => {
-  const { fetchNews, news } = props;
+  const { getMarketNews, news } = props;
   useEffect(() => {
-    fetchNews();
-  }, [fetchNews]);
+    getMarketNews();
+  }, [getMarketNews]);
 
   return !news.length > 0 ? (
     <h1>skeltonnn</h1>
@@ -42,8 +41,9 @@ const MarketNews = (props) => {
     </CardsContainer>
   );
 };
-export default WithLoading(MarketNews);
+export default MarketNews;
 
 MarketNews.propTypes = {
-  news: PropTypes.array.isRequired,
+  news: PropTypes.arrayOf(object).isRequired,
+  getMarketNews: PropTypes.func.isRequired,
 };
