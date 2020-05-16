@@ -39,5 +39,6 @@ const DeleteConfirmationForm = (props) => {
 DeleteConfirmationForm.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
   onClose: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
 export default DeleteConfirmationForm;
