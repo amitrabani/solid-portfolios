@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import MainContainer from './AppStyles';
-import AccountPage from './components/AcountPage/AccountPage';
-import MainPageContainer from './components/common/MainPage/MainPageContainer';
+import MainPage from './components/common/MainPage/MainPage';
 import MarketSummarry from './components/common/MarketSummary/MarketSummary';
 import AboutPage from './components/common/Navbar/AboutPage/AboutPage';
 import NavbarContainer from './components/common/Navbar/NavbarContainer';
@@ -13,17 +12,18 @@ import PortfolioManagementContainer from './components/user/PortfolioManagement/
 import PortfoliosPageContainer from './components/user/PortfoliosPage/PortfoliosPageContainer';
 import PrivateRoute from './components/user/PrivateRoute';
 import * as ROUTES from './constants/routes';
+import AccountPage from './future-components/AcountPage/AccountPage';
 
 
 function App(props) {
-  const { auth, signIn, fetchPortfoliosFromFirestore } = props;
+  const { auth, signIn, fetchPortfolios } = props;
+  const uid = localStorage.getItem('uid');
   useEffect(() => {
-    const uid = localStorage.getItem('uid');
-    if (uid) {
+    if (!auth.uid) {
       signIn(uid);
-      fetchPortfoliosFromFirestore();
+      fetchPortfolios();
     }
-  }, []);
+  }, [auth.uid]);
 
   return (
     <Router>
@@ -33,25 +33,23 @@ function App(props) {
       </header>
       <MainContainer>
         <Switch>
-          <Route exact path={ROUTES.LANDING} component={MainPageContainer} />
+          <Route exact path={ROUTES.LANDING} component={MainPage} />
           <Route path={ROUTES.ACCOUNT} component={AccountPage} />
           <Route path={ROUTES.ABOUT} component={AboutPage} />
           <Route path={ROUTES.BLOG}>
             <h1>Under Construction</h1>
           </Route>
-          {auth.uid && (
-            <PrivateRoute>
-              <Route
-                exact
-                path={ROUTES.PORTFOLIOS}
-                component={PortfoliosPageContainer}
-              />
+          <PrivateRoute>
+            <Route
+              exact
+              path={ROUTES.PORTFOLIOS}
+              component={PortfoliosPageContainer}
+            />
 
-              <Route exact path={ROUTES.PORTFOLIO_MANAGEMENT}>
-                <PortfolioManagementContainer />
-              </Route>
-            </PrivateRoute>
-          )}
+            <Route exact path={ROUTES.PORTFOLIO_MANAGEMENT}>
+              <PortfolioManagementContainer />
+            </Route>
+          </PrivateRoute>
         </Switch>
       </MainContainer>
     </Router>
@@ -62,7 +60,7 @@ App.propTypes = {
   auth: PropTypes.shape({
     uid: PropTypes.any,
   }),
-  fetchPortfoliosFromFirestore: PropTypes.func.isRequired,
+  fetchPortfolios: PropTypes.func.isRequired,
   signIn: PropTypes.func.isRequired,
 };
 
