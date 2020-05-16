@@ -93,6 +93,7 @@ export const getPortfoliosFromFirestore = (
   failedCallback,
 ) => {
   const portfoliosRef = getPortfoliosCollectionRef(uid);
+
   return portfoliosRef.onSnapshot(
     (querySnapshot) => {
       const portfolios = handleDocChanges(querySnapshot, oldPortfolios);
@@ -106,7 +107,6 @@ export const getPortfoliosFromFirestore = (
   );
 };
 
-// block duplicates
 export const addSymbolToFirestorePortfolio = (uid, portfolioName, quote) => firestore.collection('users').doc(uid)
   .collection('portfolios')
   .doc(portfolioName)
