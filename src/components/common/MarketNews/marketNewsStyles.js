@@ -4,7 +4,6 @@ import Theme from '../../../elements/Theme';
 
 export const CardsContainer = styled.div`
   border-right: 1px solid #c6cdd5;
-  /* width: 70%; */
   position: relative;
   height: 40em;
   align-content: flex-start;
@@ -25,7 +24,6 @@ export const CardsContainer = styled.div`
     background: ${Theme.primaryColor};
     border-radius: 2em;
     outline: 1px solid slategrey;
-    /* width: 100px;   */
   }
   @media (max-width: 768px) {
     article {
