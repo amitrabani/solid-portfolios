@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 
 import Theme from '../../../elements/Theme';
 import LeftArrow from '../../../icons/LeftArrow';
@@ -8,14 +6,15 @@ import RightArrow from '../../../icons/RightArrow';
 import stocksData from './MarketSummaryContainer';
 import {
   ArrowButtonsContainer,
-  Container,
-  Ul,
-  TopText,
-  MiddleText,
   BottomText,
+  Container,
   LeftButton,
+  MiddleText,
   RightButton,
+  TopText,
+  Ul,
 } from './marketSummaryStyles';
+
 
 const MarketSummarry = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -24,13 +23,6 @@ const MarketSummarry = () => {
   useEffect(() => {
     setGroupedStocks(generateStocksObjects());
   }, []);
-  //  combine to one function
-  const moveNext = () => {
-    setCurrentIndex(currentIndex + 1);
-  };
-  const movePrevious = () => {
-    setCurrentIndex(currentIndex - 1);
-  };
 
   const generateStocksObjects = () => {
     const groupedStocksArray = [];
@@ -67,14 +59,14 @@ const MarketSummarry = () => {
       <ArrowButtonsContainer>
         <LeftButton
           type="submit"
-          onClick={movePrevious}
+          onClick={() => setCurrentIndex(currentIndex - 1)}
           disabled={currentIndex <= 0}
         >
           <LeftArrow width="50" height="50" color={Theme.primaryColor} />
         </LeftButton>
         <RightButton
           type="submit"
-          onClick={moveNext}
+          onClick={() => setCurrentIndex(currentIndex + 1)}
           disabled={currentIndex >= groupedStocks.length - 1}
         >
           <RightArrow width="50" height="50" color={Theme.primaryColor} />
@@ -84,7 +76,3 @@ const MarketSummarry = () => {
   );
 };
 export default MarketSummarry;
-
-MarketSummarry.propTypes = {
-  // stocks: PropTypes.object,
-};
