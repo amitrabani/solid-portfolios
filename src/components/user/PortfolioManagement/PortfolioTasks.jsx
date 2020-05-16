@@ -25,6 +25,7 @@ const PortfolioTasks = (props) => {
         ) : (
           <AddSymbolFormContainer portfolioName={portfolio} />
         )}
+
     </TaskButtonContainer>
   );
 };
