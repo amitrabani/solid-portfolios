@@ -21,7 +21,6 @@ const suggestionsList = (props) => {
 suggestionsList.propTypes = {
   filteredSuggestions: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClick: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   possibleSuggestions: PropTypes.any.isRequired,
 };
 export default suggestionsList;
