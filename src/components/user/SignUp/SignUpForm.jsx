@@ -7,6 +7,7 @@ import { LANDING } from '../../../constants/routes';
 import {
   BaseContainer, ButtonsContainer, Form, FormGroup, Header,
 } from '../../../elements/FormStyles';
+import useTypingRestrictions from '../../../hooks/useTypingRestrictions';
 import CircularProgress from '../../common/CircularProgress/CircularProgress';
 
 
@@ -19,6 +20,8 @@ const SignUpForm = (props) => {
   const [passwordOne, setPasswordOne] = useState('');
   const [passwordTwo, setPasswordTwo] = useState('');
   const [redirectHome, setRedirectHome] = useState(false);
+
+  const isLegalInput = useTypingRestrictions(username, firstName, lastName);
 
   const handleSignup = (event) => {
     event.preventDefault();
@@ -34,7 +37,7 @@ const SignUpForm = (props) => {
     setRedirectHome(true);
   };
 
-  const isInvalid = passwordOne !== passwordTwo
+  const isInvalid = isLegalInput || passwordOne !== passwordTwo
     || passwordOne === ''
     || email === ''
     || username === '';
@@ -125,11 +128,15 @@ const SignUpForm = (props) => {
             </ButtonsContainer>
             {error && (
               <>
-                <h3>Login Failed</h3>
+                <h3>Sign Up Failed</h3>
                 <p style={{ color: 'red ' }}>{error}</p>
               </>
             )}
           </Form>
+          <div>
+            {isLegalInput
+                  && <p>Input should be between 2 to 15 charcters letters and numbers only!</p>}
+          </div>
         </BaseContainer>
       )}
     </>

@@ -15,7 +15,6 @@ const PortfoliosPage = (props) => {
     isFetchingPortfolios,
     fetchPortfolios,
   } = props;
-
   useEffect(() => {
     if (portfolios.length === 0) {
       fetchPortfolios();
@@ -42,7 +41,7 @@ PortfoliosPage.propTypes = {
   fetchError: PropTypes.any.isRequired,
   fetchPortfolios: PropTypes.func.isRequired,
   isFetchingPortfolios: PropTypes.bool,
-  portfolios: PropTypes.objectOf(object),
+  portfolios: PropTypes.arrayOf(object),
 };
 
 

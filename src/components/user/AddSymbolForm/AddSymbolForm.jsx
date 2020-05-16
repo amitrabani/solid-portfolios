@@ -6,6 +6,7 @@ import {
   BaseContainer, ButtonsContainer, Form, FormGroup, Header,
 } from '../../../elements/FormStyles';
 import usePrevious from '../../../hooks/usePrevious';
+import useTypingRestrictions from '../../../hooks/useTypingRestrictions';
 import CircularProgress from '../../common/CircularProgress/CircularProgress';
 import Modal from '../../common/Modal/Modal';
 import SuggestionsList from '../../common/SuggestionsList/SuggestionsList';
@@ -522,18 +523,21 @@ const stocksSuggestions = {
 
 const AddSymbolForm = (props) => {
   const { isFetching, portfolioName, addSymbol } = props;
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [amount, setAmount] = useState(0);
   const [symbol, setSymbol] = useState('');
+
   const prevFetchingStatus = usePrevious(isFetching);
+  const isLegalInput = useTypingRestrictions(symbol);
 
   useEffect(() => {
     if (!isFetching && prevFetchingStatus === true) {
       setModalOpen(false);
     }
-  }, [isFetching]);
+  }, [isFetching, symbol]);
 
   const toggleModalOpen = () => {
     setModalOpen(!isModalOpen);
@@ -561,6 +565,8 @@ const AddSymbolForm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     addSymbol(amount, symbol, portfolioName);
+    setSymbol('');
+    setAmount(0);
   };
 
   const handleAmount = (event) => {
@@ -619,11 +625,13 @@ const AddSymbolForm = (props) => {
                     />
                   </FormGroup>
                   <ButtonsContainer>
-                    <button type="submit" disabled={symbol.length < 1} onClick={handleSubmit}>
+                    <button type="submit" disabled={symbol.length < 1 || isLegalInput} onClick={handleSubmit}>
                       Submit
                     </button>
                     <button type="button" onClick={toggleModalOpen}>Cancel</button>
                   </ButtonsContainer>
+                  {isLegalInput
+                  && <h3>Input should be between 2 to 15 charcters letters and numbers only!</h3>}
                 </Form>
               </BaseContainer>
             )}

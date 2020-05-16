@@ -6,6 +6,7 @@ import {
   BaseContainer, ButtonsContainer, Form, FormGroup, Header,
 } from '../../../elements/FormStyles';
 import usePrevious from '../../../hooks/usePrevious';
+import useTypingRestrictions from '../../../hooks/useTypingRestrictions';
 import CircularProgress from '../../common/CircularProgress/CircularProgress';
 
 
@@ -16,6 +17,8 @@ const CreatePortfolioForm = (props) => {
   const [portfolioCurrency, setPortfolioCurrency] = useState('USD');
   const [portfolioName, setPortfolioName] = useState('');
   const prevFetchingStatus = usePrevious(isFetching);
+
+  const isLegalInput = useTypingRestrictions(portfolioName);
 
   useEffect(() => {
     if (!isFetching && prevFetchingStatus === true) {
@@ -73,7 +76,7 @@ const CreatePortfolioForm = (props) => {
             <ButtonsContainer>
               <button
                 type="submit"
-                disabled={portfolioName.length < 2}
+                disabled={isLegalInput || portfolioName.length < 2}
                 onClick={handleAddPortoflio}
               >
                 Submit
@@ -89,6 +92,7 @@ const CreatePortfolioForm = (props) => {
               </p>
             </>
             )}
+            {isLegalInput && <h3>Bad Naming</h3>}
           </Form>
         </>
       )}
@@ -97,7 +101,6 @@ const CreatePortfolioForm = (props) => {
 };
 
 CreatePortfolioForm.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
   fetchingPortfoliosError: PropTypes.any,
   isFetching: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
