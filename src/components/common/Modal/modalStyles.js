@@ -11,10 +11,17 @@ export const ModalContainer = styled.div`
     background-color: #00000069;
   }
   @media (max-width: 768px) {
-    div {
-      width: 100%;
-      height: 100%;
+    div #modalContainer :first-of-type {
+      display: flex;
+      flex-wrap: inherit;
+      flex-direction: column;
+      text-align: center;
     }
+    #content {
+  display:grid;
+    }
+    #modalContainer{flex-wrap:wrap-reverse};
+
   }
 `;
 
@@ -32,20 +39,4 @@ export const ModalContent = styled.div`
   height: fit-content;
   width: fit-content;
   padding: 2.5em;
-  div {
-    /* display: flex; */
-  }
-
-  /* min-width */
-  /* form {
-    display: flex;
-    flex-direction: column;
-  } */
-  /* label {
-    cursor: pointer;
-    display: block;
-    font-weight: 400;
-    font-size: 1.125rem;
-    line-height: 1.4;
-  }  */
 `;
