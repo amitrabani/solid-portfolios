@@ -1,9 +1,10 @@
-import { connect } from "react-redux";
-import Navbar from "./Navbar";
+import { connect } from 'react-redux';
+
+import Navbar from './Navbar';
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth
+    auth: state.auth,
   };
 }
 
