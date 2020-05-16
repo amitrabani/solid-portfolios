@@ -29,6 +29,7 @@ export const signIn = (email, password) => (dispatch) => {
 
 export const signOut = () => (dispatch) => {
   signOutWithFirebase()
+    .then(() => localStorage.removeItem('uid'))
     .then(() => dispatch(setActionStatus(SIGNOUT_SUCCESS)))
     .then(() => {
       dispatch(resetPortfolios());
