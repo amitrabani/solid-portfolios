@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import { useState, useEffect, useRef } from 'react';
 
 export default (initialIsVisible) => {

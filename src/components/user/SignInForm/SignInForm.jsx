@@ -9,11 +9,6 @@ import {
 } from '../../../elements/FormStyles';
 import CircularProgress from '../../common/CircularProgress/CircularProgress';
 
-
-// const INITIAL_STATE = {
-//   email: "",
-//   password: "",
-// };
 const SignInForm = (props) => {
   const { signIn, signUpWithGoogle, auth } = props;
   const [redirectHome, setRedirectHome] = useState(false);
@@ -42,7 +37,6 @@ const SignInForm = (props) => {
   return (
     <>
       {redirectHome && <Redirect to={LANDING} />}
-
       {auth.isAuthenticating ? (
         <CircularProgress />
       ) : (
