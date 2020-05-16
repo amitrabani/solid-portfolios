@@ -1,9 +1,8 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import Theme from './Theme';
 
-
-export const Table = styled.table`
+const Table = styled.table`
   font-size: 0.9rem;
   margin: 1em auto;
   color: #eaeaea;
@@ -26,15 +25,4 @@ export const Table = styled.table`
     border: 2px solid ${Theme.primaryColor};
   }
 `;
-export const Td = styled.td`
-  width: 0;
-  padding: 0.2em;
-  span {
-    font-weight: 600;
-    color: ${Theme.primaryColor};
-  }
-  ${(props) => props.positive === true
-    && css`
-      color: ${Theme.positiveColor};
-    `}
-`;
+export default Table;
