@@ -1,15 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 import { getAuth } from '../../redux/selectors';
+import Modal from '../common/Modal/Modal';
+import LoginManagement from './LoginManagement/LoginManagement';
+
 
 const PrivateRoute = (props) => {
-  // eslint-disable-next-line react/prop-types
+  const [isModalOpen, setModalOpen] = useState(true);
   const { uid, children } = props;
-  return <>{uid ? children : <Redirect to="/" />}</>;
+
+  const toggleModalOpen = () => {
+    setModalOpen(!isModalOpen);
+  };
+
+
+  return uid ? children
+    : (
+      <div style={{ height: '70%', width: '50%' }}>
+        {isModalOpen && (
+        <Modal
+          open={isModalOpen}
+          style={{ backgroundColor: '£fcc117e3' }}
+          onClose={toggleModalOpen}
+        >
+          <LoginManagement />
+        </Modal>
+        )}
+      </div>
+    );
 };
 
 PrivateRoute.propTypes = {
