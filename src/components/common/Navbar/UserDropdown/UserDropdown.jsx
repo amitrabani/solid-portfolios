@@ -17,10 +17,6 @@ const UserDropdown = (props) => {
     setIsComponentVisible,
   } = useComponentVisible(false);
 
-  // useEffect(() => {
-  // setIsComponentVisible(isOpen);
-  // }, [isOpen]);
-
   const toggleOpen = () => {
     setIsComponentVisible(!isComponentVisible);
   };
