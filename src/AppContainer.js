@@ -8,7 +8,7 @@ import { getAuth } from './redux/selectors';
 
 const mapDispatchToProps = (dispatch) => ({
   signIn: (uid) => dispatch(setUserSignedInSuccess(uid)),
-  fetchPortfoliosFromFirestore: () => dispatch(fetchPortfolios()),
+  fetchPortfolios,
 });
 
 const mapStateToProps = (state) => ({
