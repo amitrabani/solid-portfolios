@@ -17,13 +17,10 @@ export const addPortfolio = (portfolio) => (dispatch) => {
   dispatch(setActionStatus(START_FETCHING_PORTFOLIOS));
   const { uid } = store.getState().auth;
   addPortfolioToFirestore(uid, portfolio)
-    .then(() => {
-      dispatch(setActionStatus(DONE_FETCHING_PORTFOLIOS));
-    })
     .catch((error) => {
       dispatch(setError(FETCHING_PORTFOLIOS_ERROR, error.message));
     })
-    .then(() => dispatch(setActionStatus(DONE_FETCHING_PORTFOLIOS)));
+    .finally(() => dispatch(setActionStatus(DONE_FETCHING_PORTFOLIOS)));
 };
 
 export const fetchPortfolios = () => (dispatch) => {
@@ -36,7 +33,9 @@ export const fetchPortfolios = () => (dispatch) => {
     dispatch(setActionStatus(DONE_FETCHING_PORTFOLIOS));
   };
 
-  const failedCallback = (error) => dispatch(setError(FETCHING_PORTFOLIOS_ERROR, error.message));
+  const failedCallback = (error) => {
+    dispatch(setError(FETCHING_PORTFOLIOS_ERROR, error.message));
+  };
   getPortfoliosFromFirestore(
     uid,
     oldPortfolios,
