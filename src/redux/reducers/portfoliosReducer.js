@@ -20,7 +20,6 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PORTFOLIOS:
       return { ...state, portfolios: action.payload };
-
     case START_FETCHING_PORTFOLIOS:
       return {
         ...state,
