@@ -13,13 +13,12 @@ const Login = () => {
 
   return (
     <>
-      <Button>
-        <div onClick={toggleModalOpen}>Login</div>
+      <Button onClick={toggleModalOpen}>
+        <div>Login</div>
       </Button>
       <div style={{ height: '70%', width: '50%' }}>
         {isModalOpen && (
           <Modal
-            id="sdfsvs"
             open={isModalOpen}
             style={{ backgroundColor: '£fcc117e3' }}
             onClose={toggleModalOpen}
