@@ -5,7 +5,7 @@ import Theme from '../../../elements/Theme';
 
 export const AppHeader = styled.div`
   overflow-y: hidden;
-  color: ${Theme.dataColor};
+  color: #fff;
   margin: 1em;
 `;
 
@@ -31,12 +31,11 @@ export const Container = styled.nav`
   .removable {
       display: contents;
     }
-    
+
   @media (max-width: 730px) {
     display: flex;
     flex-direction: column;
     .navItem {
-      /* position: absolute; */
       ul {
         display: flex;
         flex-direction: column;
@@ -60,7 +59,6 @@ export const List = styled.ul`
   list-style: none;
   width: min-content;
   align-items: center;
-  /* position:relative; */
   padding: 0;
   :hover li a {
     opacity: 0.5;
