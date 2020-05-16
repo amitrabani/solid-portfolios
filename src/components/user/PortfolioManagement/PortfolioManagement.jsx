@@ -3,23 +3,27 @@ import React, { useEffect, useState } from 'react';
 import PropTypes, { object } from 'prop-types';
 import { useLocation } from 'react-router-dom';
 
-import { Table, Td } from '../../../elements/TableStyles';
+import Table from '../../../elements/TableStyles';
 import Snackbar from '../../common/snackbar/Snackbar';
-import { PortfolioHeader, TradeButton } from './portfolioManagementStyles';
+import { PortfolioHeader, SymbolTd, TradeButton } from './portfolioManagementStyles';
 import PortfolioTasks from './PortfolioTasks';
 
 
 const PortfolioManagement = (props) => {
-  const { portfolios, deleteSymbols } = props;
+  const { portfolios, deleteSymbols, fetchPortfolios } = props;
   const { portfolios: portfoliosList } = portfolios;
-  const [portfolio, setPortfolio] = useState({ stocks: [], name: 'loading' });
+  const [portfolio, setPortfolio] = useState({ name: 'loading', stocks: [] });
   const [selectedSymbols, setSelectedSymbols] = useState({});
+  const [featureUnderDevelopment, setFeatureUnderDevelopment] = useState(false);
   const { index } = useLocation().state;
-  const tableHeaders = ['Symbol', 'Price', 'Shares', 'Change', 'Day Range', 'Portfolio Stake', 'Buy/Sell', 'Currency'];
+  const tableHeaders = ['Symbol', 'Price', 'Shares', 'Value', 'Day Range', 'Buy/Sell', 'Currency'];
 
   useEffect(() => {
+    if (portfolios.portfolios.length === 0) {
+      fetchPortfolios();
+    }
     setPortfolio(portfoliosList[index]);
-  }, [portfolios]);
+  }, [portfoliosList.length, portfoliosList[index]]);
 
   const handleSelectSymbol = (event) => {
     const currentValue = selectedSymbols[event.target.name];
@@ -33,10 +37,9 @@ const PortfolioManagement = (props) => {
     setSelectedSymbols({});
   };
 
-  const renderHeader = () => (!portfolio.stocks.length > 0 ? (
+  const renderHeader = () => (portfolio && !portfolio.stocks.length > 0 ? (
     <PortfolioHeader>
-      You have no stocks
-      {portfolio.name }
+      Your Portfolio Is Empty
       ,
       <br />
       Add
@@ -50,63 +53,70 @@ const PortfolioManagement = (props) => {
     </PortfolioHeader>
   ));
 
-  const renderTable = () => (
+  const renderTable = () => (portfolio && portfolio.stocks.length > 0 && (
     <Table>
       <thead>
         <tr>
           {tableHeaders.map((header) => (
-            <th>{header}</th>
+            <th key={header}>{header}</th>
           ))}
         </tr>
       </thead>
       <tbody>
         {portfolio.stocks.map((stock) => (
-          <tr key={stock}>
-            <Td>
+          <tr key={stock.id}>
+            <SymbolTd>
               <label>
                 <input
                   onChange={handleSelectSymbol}
-                  id="symbol"
                   type="checkbox"
                   name={stock.symbol}
                   checked={selectedSymbols[stock.symbol] || ''}
                 />
                 {stock.symbol}
               </label>
-            </Td>
+            </SymbolTd>
             <td>{stock.current}</td>
-            <Td>{stock.shares}</Td>
-            <Td positive>20%</Td>
+            <td>{stock.shares}</td>
+            <td>
+              {stock.shares * stock.current}
+              $
+            </td>
             <td>
               {stock.todaysLow.toFixed(2)}
               <canvas width="70" height="1" />
               {stock.todaysHigh}
             </td>
-            <Td>stock.stakesss</Td>
             <td>
-              <TradeButton>Trade</TradeButton>
+              <TradeButton onClick={() => setFeatureUnderDevelopment(true)}>Trade</TradeButton>
             </td>
-            <Td>$</Td>
+            <td>$</td>
           </tr>
         ))}
       </tbody>
     </Table>
-  );
+  ));
 
-  if (!portfolio) return <h1>Loading Skeleton</h1>;
+  if (portfolios.isFetchingPortfolios) return <h1>Loading Skeleton</h1>;
 
   return (
     <>
+      { featureUnderDevelopment && (
+      <Snackbar message="Trade Button is currently under development:((" />
+      )}
       {portfolios.fetchingSymbolsError && (
         <Snackbar message={portfolios.fetchingSymbolsError} />
       )}
       {renderHeader()}
+      {portfolio
+      && (
       <PortfolioTasks
         handleDelete={handleDelete}
         portfolio={portfolio.name}
         selectedSymbols={selectedSymbols}
       />
-      {portfolio.stocks.length > 0 && renderTable()}
+      )}
+      {renderTable()}
     </>
   );
 };
@@ -117,6 +127,7 @@ PortfolioManagement.propTypes = {
     portfolios: PropTypes.arrayOf(object) || false.isRequired,
   }),
   deleteSymbols: PropTypes.func.isRequired,
+  fetchPortfolios: PropTypes.func.isRequired,
 };
 
 export default PortfolioManagement;
