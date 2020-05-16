@@ -8,11 +8,11 @@ import MainPage from './components/common/MainPage/MainPage';
 import MarketSummarry from './components/common/MarketSummary/MarketSummary';
 import AboutPage from './components/common/Navbar/AboutPage/AboutPage';
 import NavbarContainer from './components/common/Navbar/NavbarContainer';
+import AccountPage from './components/user/AcountPage/AccountPage';
 import PortfolioManagementContainer from './components/user/PortfolioManagement/PortfolioManagementContainer';
 import PortfoliosPageContainer from './components/user/PortfoliosPage/PortfoliosPageContainer';
 import PrivateRoute from './components/user/PrivateRoute';
 import * as ROUTES from './constants/routes';
-import AccountPage from './future-components/AcountPage/AccountPage';
 
 
 function App(props) {
