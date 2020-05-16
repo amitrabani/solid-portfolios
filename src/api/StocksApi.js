@@ -1,4 +1,6 @@
 import axios from 'axios';
+import shortid from 'shortid';
+
 
 export const fetchQuote = (symbol) => axios
   .get(
@@ -15,12 +17,12 @@ export const fetchQuote = (symbol) => axios
     if (response.data === 'Symbol not supported') {
       throw new Error(response.data);
     } else {
-      // extract to toQuoteModel
       const quote = {
         current: response.data.c,
         todaysHigh: response.data.h,
         todaysLow: response.data.l,
         previeousClose: response.data.pc,
+        id: shortid.generate(),
         symbol,
       };
       return quote;
