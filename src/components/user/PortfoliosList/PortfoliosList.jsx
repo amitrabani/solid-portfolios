@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-import PropTypes from 'prop-types';
+import PropTypes, { object } from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { PORTFOLIOS } from '../../../constants/routes';
 import DeleteButton from '../../../elements/DeleteButton';
-import { Table, Td } from '../../../elements/TableStyles';
+import Table from '../../../elements/TableStyles';
 import Theme from '../../../elements/Theme';
 import deleteForeverIcon from '../../../icons/deleteForeverIcon.svg';
 import deleteForeverIconHover from '../../../icons/deleteForeverIconHover.svg';
@@ -39,7 +39,7 @@ const PortfoliosList = (props) => {
           <tbody>
             {Object.keys(portfoliosList).map((index) => (
               <tr key={index}>
-                <Td
+                <td
                   style={{
                     cursor: 'hand',
                     fontSize: '1rem',
@@ -55,17 +55,17 @@ const PortfoliosList = (props) => {
                   >
                     {portfoliosList[index].name}
                   </Link>
-                </Td>
-                <Td>{portfoliosList[index].stocks.length}</Td>
-                <Td>{portfoliosList[index].currency}</Td>
-                <Td>
+                </td>
+                <td>{portfoliosList[index].stocks.length}</td>
+                <td>{portfoliosList[index].currency}</td>
+                <td>
                   <DeleteButton
                     onClick={() => setPortfolioToDelete(portfoliosList[index].name)}
                   >
                     <img alt="Delete Symbol" className="regularIcon" src={deleteForeverIcon} />
                     <img alt="Delete Symbol" className="hoverIcon" src={deleteForeverIconHover} />
                   </DeleteButton>
-                </Td>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -86,7 +86,7 @@ const PortfoliosList = (props) => {
 
 PortfoliosList.propTypes = {
   deletePortfolio: PropTypes.func.isRequired,
-  portfolios: PropTypes.shape([]).isRequired,
+  portfolios: PropTypes.objectOf(object).isRequired,
 };
 
 
