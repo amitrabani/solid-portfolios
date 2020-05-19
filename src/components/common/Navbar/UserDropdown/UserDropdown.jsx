@@ -52,8 +52,8 @@ const UserDropdown = (props) => {
               Write an Article
             </Link>
           </li>
-          <li>
-            <Link onClick={handleSignOut} className="link" to={LANDING}>
+          <li onClick={handleSignOut}>
+            <Link className="link" to={LANDING}>
               Sign Out
             </Link>
           </li>
