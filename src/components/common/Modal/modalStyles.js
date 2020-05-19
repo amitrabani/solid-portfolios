@@ -9,6 +9,16 @@ export const ModalContainer = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 111;
+  animation: fadein .7s;
+  @keyframes fadein {
+  from {
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+  }
+
   :not(Container) {
     background-color: #00000069;
   }
@@ -20,10 +30,11 @@ export const ModalContainer = styled.div`
       text-align: center;
     }
     .content {
-  display:grid;
+      display:grid;
     }
-    .modalContainer{flex-wrap:wrap-reverse};
+    .modalContainer{flex-wrap:wrap-reverse
 
+    };
   }
 `;
 
