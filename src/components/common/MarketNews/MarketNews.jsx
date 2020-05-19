@@ -12,7 +12,7 @@ const MarketNews = (props) => {
     getMarketNews();
   }, [getMarketNews]);
 
-  return !news.length > 0 ? (
+  return news.length === 0 ? (
     <h1>skelton</h1>
   ) : (
     <CardsContainer>
