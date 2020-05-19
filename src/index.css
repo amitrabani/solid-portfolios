@@ -1,5 +1,4 @@
 body {
-  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #fff;
@@ -10,9 +9,4 @@ body {
   line-height: 1.43;
   letter-spacing: 0.01071em;
   background-color: #1f1b24;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }
