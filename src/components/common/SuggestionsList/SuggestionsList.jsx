@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import { List, ListItem } from './suggestionListStyles';
 
 const suggestionsList = (props) => {
-  const { filteredSuggestions, onClick, possibleSuggestions = {} } = props;
+  const { filteredSuggestions, onSuggestionClicked, possibleSuggestions = {} } = props;
   return (
     <List className="suggestions">
       {filteredSuggestions.map((suggestion) => (
-        <ListItem key={suggestion} onClick={() => onClick(suggestion)}>
+        <ListItem key={suggestion} onClick={() => onSuggestionClicked(suggestion)}>
           <h3>{suggestion}</h3>
           <p>{possibleSuggestions[suggestion]}</p>
         </ListItem>
@@ -20,7 +20,7 @@ const suggestionsList = (props) => {
 
 suggestionsList.propTypes = {
   filteredSuggestions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onClick: PropTypes.func.isRequired,
+  onSuggestionClicked: PropTypes.func.isRequired,
   possibleSuggestions: PropTypes.any.isRequired,
 };
 export default suggestionsList;
