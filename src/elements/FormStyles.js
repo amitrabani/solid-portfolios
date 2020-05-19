@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import ButtonStyles from './ButtonStyles';
+import { smallScreenWidth } from './consts';
 
 export const BaseContainer = styled.div`
   width: 100%;
@@ -26,10 +27,10 @@ export const Header = styled.div`
 
 export const Form = styled.form`
   overflow-y: auto;
-  max-height: calc(100vh - 45px) !important;
+  max-height: calc(100vh - 45px);
   flex-direction: column;
   align-items: center;
-  @media (max-width: 768px) {
+  @media (max-width: ${smallScreenWidth}) {
     width: 100%;
     height: 100%;
   }

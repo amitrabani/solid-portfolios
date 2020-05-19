@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { smallScreenWidth } from '../../../elements/consts';
+
 export const ModalContainer = styled.div`
   position: fixed;
   top: 0;
@@ -10,17 +12,17 @@ export const ModalContainer = styled.div`
   :not(Container) {
     background-color: #00000069;
   }
-  @media (max-width: 768px) {
-    div #modalContainer :first-of-type {
+  @media (max-width: ${smallScreenWidth}) {
+    div .modalContainer :first-of-type {
       display: flex;
       flex-wrap: inherit;
       flex-direction: column;
       text-align: center;
     }
-    #content {
+    .content {
   display:grid;
     }
-    #modalContainer{flex-wrap:wrap-reverse};
+    .modalContainer{flex-wrap:wrap-reverse};
 
   }
 `;

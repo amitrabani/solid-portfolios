@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import ButtonStyles from './elements/ButtonStyles';
+import { smallScreenWidth } from './elements/consts';
 
 export default styled.main`
   text-align: center;
@@ -15,7 +16,7 @@ export default styled.main`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${smallScreenWidth}) {
     div:first-of-type {
       display: flex;
       flex-wrap: wrap;
