@@ -8,6 +8,7 @@ import Snackbar from '../../common/snackbar/Snackbar';
 import { PortfolioHeader, SymbolTd, TradeButton } from './portfolioManagementStyles';
 import PortfolioTasks from './PortfolioTasks';
 
+const tableHeaders = ['Symbol', 'Price', 'Shares', 'Value', 'Day Range', 'Buy/Sell', 'Currency'];
 
 const PortfolioManagement = (props) => {
   const { portfolios, deleteSymbols, fetchPortfolios } = props;
@@ -16,14 +17,13 @@ const PortfolioManagement = (props) => {
   const [selectedSymbols, setSelectedSymbols] = useState({});
   const [featureUnderDevelopment, setFeatureUnderDevelopment] = useState(false);
   const { index } = useLocation().state;
-  const tableHeaders = ['Symbol', 'Price', 'Shares', 'Value', 'Day Range', 'Buy/Sell', 'Currency'];
 
   useEffect(() => {
-    if (portfolios.portfolios.length === 0) {
+    if (portfoliosList.length === 0) {
       fetchPortfolios();
     }
     setPortfolio(portfoliosList[index]);
-  }, [portfoliosList.length, portfoliosList[index]]);
+  }, [portfoliosList.length, portfoliosList[index], index]);
 
   const handleSelectSymbol = (event) => {
     const currentValue = selectedSymbols[event.target.name];
@@ -37,19 +37,18 @@ const PortfolioManagement = (props) => {
     setSelectedSymbols({});
   };
 
-  const renderHeader = () => (portfolio && !portfolio.stocks.length > 0 ? (
+  const renderHeader = () => (portfolio && portfolio.stocks.length === 0 ? (
     <PortfolioHeader>
-      Your Portfolio Is Empty
-      ,
-      <br />
-      Add
-      Stocks Now
+      <p>
+        Your Portfolio Is Empty,
+      </p>
+      <p>
+        Add Stocks Now
+      </p>
     </PortfolioHeader>
   ) : (
     <PortfolioHeader>
-      My Holdings In
-      {portfolio.name}
-      :
+      My Holdings:
     </PortfolioHeader>
   ));
 
