@@ -46,7 +46,6 @@ export const Ul = styled.ul`
   margin-top: 10px;
   width: 85%;
   display: flex;
-  transition: transform 3000ms ease 0s;
   li {
     width: 75%;
     border-style: solid;
@@ -56,7 +55,10 @@ export const Ul = styled.ul`
     border-left-width: 0px;
     border-right-width: 1px;
     padding: 0 1em;
-  }
+    animation: fadein .7s ;
+  @keyframes fadein {
+      transition: all ease-in;
+    }
 `;
 
 export const TopText = styled.h3`
