@@ -15,7 +15,7 @@ const PortfolioTasks = (props) => {
   return (
     <TaskButtonContainer>
       {Object.values(selectedSymbols).some(
-        (value) => value === true,
+        Boolean,
       ) ? (
         <CustomDeleteButton onClick={handleDelete}>
           <img alt="delete" className="regularIcon" src={deleteForeverIcon} />
