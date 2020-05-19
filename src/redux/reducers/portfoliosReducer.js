@@ -9,7 +9,7 @@ import {
 } from '../actions/actionTypes';
 
 const initialState = {
-  isFetchingPortfolios: false,
+  isLoadingPortfolios: false,
   fetchingPortfoliosError: false,
   isFetchingSymbols: false,
   fetchingSymbolsError: false,
@@ -23,12 +23,12 @@ export default (state = initialState, action) => {
     case START_FETCHING_PORTFOLIOS:
       return {
         ...state,
-        isFetchingPortfolios: true,
+        isLoadingPortfolios: true,
         fetchingPortfoliosError: false,
       };
 
     case DONE_FETCHING_PORTFOLIOS:
-      return { ...state, isFetchingPortfolios: false };
+      return { ...state, isLoadingPortfolios: false };
 
     case FETCHING_PORTFOLIOS_ERROR:
       return { ...state, fetchingPortfoliosError: action.error };

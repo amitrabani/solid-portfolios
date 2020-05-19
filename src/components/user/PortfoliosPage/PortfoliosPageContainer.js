@@ -12,12 +12,12 @@ const mapStateToProps = () => {
   const { portfolios: portfoliosObject } = store.getState();
   const {
     fetchingPortfoliosError,
-    isFetchingPortfolios,
+    isLoadingPortfolios,
     portfolios,
   } = portfoliosObject;
   return {
     fetchError: fetchingPortfoliosError,
-    isFetchingPortfolios,
+    isLoadingPortfolios,
     portfolios,
   };
 };

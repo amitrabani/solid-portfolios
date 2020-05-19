@@ -6,10 +6,10 @@ import CreatePortfolioForm from './CreatePortfolioForm';
 
 const mapStateToProps = () => {
   const { portfolios } = store.getState();
-  const { fetchingPortfoliosError, isFetchingPortfolios } = portfolios;
+  const { fetchingPortfoliosError, isLoadingPortfolios } = portfolios;
   return {
     fetchError: fetchingPortfoliosError,
-    isFetching: isFetchingPortfolios,
+    isFetching: isLoadingPortfolios,
   };
 };
 

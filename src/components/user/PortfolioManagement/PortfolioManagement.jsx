@@ -96,7 +96,7 @@ const PortfolioManagement = (props) => {
     </Table>
   ));
 
-  if (portfolios.isFetchingPortfolios) return <h1>Loading Skeleton</h1>;
+  if (portfolios.isLoadingPortfolios) return <h1>Loading Skeleton</h1>;
 
   return (
     <>

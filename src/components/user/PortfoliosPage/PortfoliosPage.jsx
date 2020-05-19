@@ -11,7 +11,7 @@ const PortfoliosPage = (props) => {
   const {
     portfolios = {},
     fetchError,
-    isFetchingPortfolios,
+    isLoadingPortfolios,
     fetchPortfolios,
   } = props;
   useEffect(() => {
@@ -26,7 +26,7 @@ const PortfoliosPage = (props) => {
       <hr />
       <AddPortfolio />
       <Header>My Portfolios:</Header>
-      {isFetchingPortfolios ? (
+      {isLoadingPortfolios ? (
         <h1>Fetching</h1>
       ) : (
         <PortfoliosListContainer portfolios={portfolios} />
@@ -39,7 +39,7 @@ PortfoliosPage.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   fetchError: PropTypes.any.isRequired,
   fetchPortfolios: PropTypes.func.isRequired,
-  isFetchingPortfolios: PropTypes.bool,
+  isLoadingPortfolios: PropTypes.bool,
   portfolios: PropTypes.arrayOf(object),
 };
 
