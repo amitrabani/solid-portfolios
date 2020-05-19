@@ -28,13 +28,6 @@ const MarketNews = (props) => {
               {' '}
               {newsPost.summary}
             </p>
-            <CardBottom>
-              {console.log('deprecated?')}
-              {/* {newsPost.related.split(",").map((ticker) => (
-                <CardTickers key={newsPost.ticker}>{ticker}</CardTickers>
-              ))} */}
-              {/* <span>{newsPost.date}</span> */}
-            </CardBottom>
           </div>
         </Card>
       ))}
