@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import LoginManagement from '../../user/LoginManagement/LoginManagement';
+import UserAuthManager from '../../user/UserAuthManager/UserAuthManager ';
 import Modal from '../Modal/Modal';
 import { Button } from './LoginStyles';
 
@@ -23,7 +23,7 @@ const Login = () => {
             style={{ backgroundColor: '£fcc117e3' }}
             onClose={toggleModalOpen}
           >
-            <LoginManagement />
+            <UserAuthManager />
           </Modal>
         )}
       </div>
