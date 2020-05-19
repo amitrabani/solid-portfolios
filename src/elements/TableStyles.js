@@ -15,8 +15,7 @@ const Table = styled.table`
     padding: 1em;
   }
   tr:hover {
-    tr,
-    td {
+    tr, td {
       background-color: rgba(245, 245, 245, 0.39);
     }
   }

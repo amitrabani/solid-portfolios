@@ -17,7 +17,7 @@ li > h3 {
 
 export const ListItem = styled.li`
   transition: all 0.3s ease-in-out;
-  :hover{
+  :hover {
     transform: translateX(20px);
   }
 `;

@@ -16,8 +16,6 @@ export const List = styled.ul`
   padding: 7px;
   margin: 0;
   width: -webkit-fill-available;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
   border-radius: 10px;
   appearance: none;
   cursor: pointer;
