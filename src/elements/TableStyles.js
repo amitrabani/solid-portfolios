@@ -11,8 +11,9 @@ const Table = styled.table`
   border-radius: 5px;
   width: 90%;
   th {
-    font-family: serif;
+    font-family: sans-serif;
     padding: 1em;
+    font-style:italic;
   }
   tr:hover {
     tr, td {
