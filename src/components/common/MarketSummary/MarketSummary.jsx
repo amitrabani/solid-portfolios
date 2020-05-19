@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Theme from '../../../elements/Theme';
 import LeftArrow from '../../../icons/LeftArrow';
 import RightArrow from '../../../icons/RightArrow';
+import { createPaginationGroups } from '../../../utils/common';
 import stocksData from './MarketSummaryContainer';
 import {
   ArrowButtonsContainer,
@@ -21,17 +22,10 @@ const MarketSummarry = () => {
   const [groupedStocks, setGroupedStocks] = useState([]);
 
   useEffect(() => {
-    setGroupedStocks(generateStocksObjects());
+    setGroupedStocks(
+      createPaginationGroups(5, stocksData.bestMatches),
+    );
   }, []);
-
-  const generateStocksObjects = () => {
-    const groupedStocksArray = [];
-    const tabsNumber = Math.ceil(stocksData.bestMatches.length / 5);
-    for (let index = 0; index < tabsNumber; index++) {
-      groupedStocksArray.push(stocksData.bestMatches.splice(0, 5));
-    }
-    return groupedStocksArray;
-  };
 
   return (
     <Container>
@@ -45,11 +39,9 @@ const MarketSummarry = () => {
                 <TopText>{stock['2. name']}</TopText>
               </div>
               <MiddleText>
-                {' '}
                 {stock['8. currency']}
               </MiddleText>
               <BottomText stockPrice={stock['9. matchScore']}>
-                {' '}
                 {stock['9. matchScore']}
               </BottomText>
             </li>
