@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  margin-top: 30px;
+  margin-top: 1.2em;
   position: relative;
   width: 100%;
   height: fit-content;
