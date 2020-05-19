@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { Container } from './AboutPageStyles';
+
 const AboutPage = () => (
-  <div style={{ color: 'white', width: '60%', margin: '0 auto' }}>
+  <Container>
     <h1>Lorem Ipsum</h1>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut
@@ -42,7 +44,7 @@ const AboutPage = () => (
       libero tempus faucibus. Maecenas fringilla ante magna, vitae porttitor
       turpis faucibus id. Sed lectus massa, finibus vel augue sit amet, sa
     </p>
-  </div>
+  </Container>
 );
 
 export default AboutPage;
