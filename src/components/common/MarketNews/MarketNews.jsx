@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import PropTypes, { object } from 'prop-types';
 
 import {
-  Card, CardBottom, CardImg, CardsContainer,
+  Card, CardImg, CardsContainer,
 } from './marketNewsStyles';
 
 const MarketNews = (props) => {
@@ -13,19 +13,17 @@ const MarketNews = (props) => {
   }, [getMarketNews]);
 
   return !news.length > 0 ? (
-    <h1>skeltonnn</h1>
+    <h1>skelton</h1>
   ) : (
     <CardsContainer>
       {news.map((newsPost) => (
         <Card key={newsPost.id}>
           <a href={newsPost.news_url}>
-            {' '}
             <CardImg src={newsPost.image} />
           </a>
           <div style={{ textAlign: 'left' }}>
             <a href={newsPost.url}>{newsPost.headline}</a>
             <p>
-              {' '}
               {newsPost.summary}
             </p>
           </div>

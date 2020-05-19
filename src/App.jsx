@@ -18,6 +18,7 @@ import * as ROUTES from './constants/routes';
 function App(props) {
   const { auth, signIn, fetchPortfolios } = props;
   const uid = localStorage.getItem('uid');
+
   useEffect(() => {
     if (!auth.uid) {
       signIn(uid);

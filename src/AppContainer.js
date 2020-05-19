@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import App from './App';
 import { setUserSignedInSuccess } from './redux/actions/auth/authActions';
 import { fetchPortfolios } from './redux/actions/portfolios/portfoliosActionCreators';
-import { getAuth } from './redux/selectors';
+import store from './redux/store';
 
 
 const mapDispatchToProps = (dispatch) => ({
@@ -11,8 +11,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchPortfolios,
 });
 
-const mapStateToProps = (state) => ({
-  auth: getAuth(state),
+const mapStateToProps = () => ({
+  auth: store.getState().auth,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 
 import { deleteSymbols, fetchPortfolios } from '../../../redux/actions/portfolios/portfoliosActionCreators';
-import { getPortfolios } from '../../../redux/selectors';
+import store from '../../../redux/store';
 import PortfolioManagement from './PortfolioManagement';
 
 
-const mapStateToProps = (state) => ({
-  portfolios: getPortfolios(state),
+const mapStateToProps = () => ({
+  portfolios: store.getState().portfolios,
 });
 
 const mapDispatchToProps = { deleteSymbols, fetchPortfolios };

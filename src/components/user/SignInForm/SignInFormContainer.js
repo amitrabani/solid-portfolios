@@ -4,11 +4,11 @@ import {
   signIn,
   signUpWithGoogle,
 } from '../../../redux/actions/auth/authActionCreators';
-import { getAuth } from '../../../redux/selectors';
+import store from '../../../redux/store';
 import SignInForm from './SignInForm';
 
-const mapStateToProps = (state) => ({
-  auth: getAuth(state),
+const mapStateToProps = () => ({
+  auth: store.getState().auth,
 });
 
 const mapDispatchToProps = { signIn, signUpWithGoogle };

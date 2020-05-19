@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
 import getMarketNews from '../../../redux/actions/market/marketActionCreators';
-import { getNews } from '../../../redux/selectors';
+import store from '../../../redux/store';
 import MarketNews from './MarketNews';
 
 const mapDispatchToProps = { getMarketNews };
 
-const mapStateToProps = (state) => ({ news: getNews(state) });
+const mapStateToProps = () => ({ news: store.getState().market.news });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MarketNews);

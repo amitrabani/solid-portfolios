@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
-import { addSymbol } from '../../../redux/actions/portfolios/portfoliosActionCreators';
-import { getPortfolios } from '../../../redux/selectors';
+import { addSymbol, fetchPortfolios } from '../../../redux/actions/portfolios/portfoliosActionCreators';
+import store from '../../../redux/store';
 import AddSymbolForm from './AddSymbolForm';
 
-const mapStateToProps = (state) => {
-  const { fetchingSymbolsError, isFetchingSymbols } = getPortfolios(state);
+const mapStateToProps = () => {
+  const { fetchingSymbolsError, isFetchingSymbols } = store.getState().portfolios;
   return {
     fetchError: fetchingSymbolsError,
     isFetching: isFetchingSymbols,

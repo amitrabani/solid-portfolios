@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
 import { signUp } from '../../../redux/actions/auth/authActionCreators';
-import { getAuth } from '../../../redux/selectors';
+import store from '../../../redux/store';
 import SignUpForm from './SignUpForm';
 
-const mapStateToProps = (state) => ({
-  auth: getAuth(state),
+const mapStateToProps = () => ({
+  auth: store.getState().auth,
 });
 
 const mapDispatchToProps = { signUp };

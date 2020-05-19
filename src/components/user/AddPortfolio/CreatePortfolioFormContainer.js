@@ -1,14 +1,12 @@
 import { connect } from 'react-redux';
 
 import { addPortfolio } from '../../../redux/actions/portfolios/portfoliosActionCreators';
-import { getPortfolios } from '../../../redux/selectors';
+import store from '../../../redux/store';
 import CreatePortfolioForm from './CreatePortfolioForm';
 
-
-const mapStateToProps = (state) => {
-  const { fetchingPortfoliosError, isFetchingPortfolios } = getPortfolios(
-    state,
-  );
+const mapStateToProps = () => {
+  const { portfolios } = store.getState();
+  const { fetchingPortfoliosError, isFetchingPortfolios } = portfolios;
   return {
     fetchError: fetchingPortfoliosError,
     isFetching: isFetchingPortfolios,
