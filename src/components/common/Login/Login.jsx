@@ -20,7 +20,6 @@ const Login = () => {
         {isModalOpen && (
           <Modal
             open={isModalOpen}
-            style={{ backgroundColor: '£fcc117e3' }}
             onClose={toggleModalOpen}
           >
             <UserAuthManager />

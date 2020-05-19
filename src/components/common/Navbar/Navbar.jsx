@@ -10,7 +10,7 @@ import useComponentVisible from '../../../hooks/useComponentVisable';
 import useWideMode from '../../../hooks/useWideMode';
 import Login from '../Login/Login';
 import {
-  AppHeader, Container, LinksContainer, List, SettingsButton,
+  AppHeader, Container, LinksContainer, List, SettingsButton, ButtonContainer,
 } from './NavbarStyles';
 import UserDropDownContainer from './UserDropdown/UserDropDownContainer';
 
@@ -35,9 +35,9 @@ const Navbar = (props) => {
   return (
     <Container>
       {!isWideMode && (
-        <div style={{ position: 'relative', width: '100%', height: '6rem' }}>
+        <ButtonContainer>
           <SettingsButton onClick={toggleOpen}>open</SettingsButton>
-        </div>
+        </ButtonContainer>
       )}
       {' '}
       {isComponentVisible && (

@@ -2,6 +2,12 @@ import styled, { css } from 'styled-components';
 
 import Theme from '../../../elements/Theme';
 
+export const Container = styled.div`
+  width: 50em;
+  display: flex;
+  justify-content: center;
+`;
+
 export const Login = styled.div`
   width: 27em;
   height: 100%;

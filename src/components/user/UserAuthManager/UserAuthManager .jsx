@@ -5,7 +5,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { LANDING } from '../../../constants/routes';
 import SignInFormContainer from '../SignInForm/SignInFormContainer';
 import SignUpFormContainer from '../SignUp/SignUpFormContainer';
-import { FormChanger, Login } from './userAuthManagerStyles';
+import { FormChanger, Login, Container } from './userAuthManagerStyles';
 
 const RENDER_SIGNIN = 'signIn';
 const RENDER_SIGNUP = 'signUp';
@@ -30,7 +30,7 @@ const UserAuthManager = () => {
     return history.push(LANDING);
   }
   return (
-    <div style={{ width: '50em', display: 'flex', justifyContent: 'center' }}>
+    <Container>
       <Login>
         <div className="container">
           {renderedForm === RENDER_SIGNIN && (
@@ -49,7 +49,7 @@ const UserAuthManager = () => {
           </div>
         </FormChanger>
       </Login>
-    </div>
+    </Container>
   );
 };
 

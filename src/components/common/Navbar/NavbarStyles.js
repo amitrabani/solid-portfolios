@@ -55,6 +55,12 @@ export const Container = styled.nav`
   }
 `;
 
+export const ButtonContainer = styled.div`
+  position: relative;
+  width: 100% ;
+  height: 6rem
+`;
+
 export const List = styled.ul`
   display: flex;
   list-style: none;
