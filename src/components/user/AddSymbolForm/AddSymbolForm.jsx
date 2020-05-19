@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 import {
   BaseContainer, ButtonsContainer, Form, FormGroup, Header,
 } from '../../../elements/FormStyles';
-import usePrevious from '../../../hooks/usePrevious';
-import useTypingRestrictions from '../../../hooks/useTypingRestrictions';
+import usePrevious from '../../../hooks/usePreviousStateAndProps';
+import { containIlegalCharacters } from '../../../utils/common';
 import CircularProgress from '../../common/CircularProgress/CircularProgress';
 import Modal from '../../common/Modal/Modal';
 import SuggestionsList from '../../common/SuggestionsList/SuggestionsList';
 import { Button, Container } from './addSymbolFormSyles';
 
-
+console.log('move');
 const stocksSuggestions = {
   A: '  Agilent Technologies Inc',
   AAL: 'American Airlines Group',
@@ -529,15 +529,23 @@ const AddSymbolForm = (props) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [amount, setAmount] = useState(0);
   const [symbol, setSymbol] = useState('');
+  const [isLegalInput, setIsLegalInput] = useState(false);
 
   const prevFetchingStatus = usePrevious(isFetching);
-  const isLegalInput = useTypingRestrictions(symbol);
+
+  useEffect(() => {
+    if (containIlegalCharacters([symbol])) {
+      setIsLegalInput(true);
+    } else {
+      setIsLegalInput(false);
+    }
+  }, [symbol]);
 
   useEffect(() => {
     if (!isFetching && prevFetchingStatus === true) {
       setModalOpen(false);
     }
-  }, [isFetching, symbol]);
+  }, [isFetching, symbol, prevFetchingStatus]);
 
   const toggleModalOpen = () => {
     setModalOpen(!isModalOpen);
@@ -559,7 +567,7 @@ const AddSymbolForm = (props) => {
       .slice(0, 7);
     setFilteredSuggestions(newFilteredSuggestions);
     setShowSuggestions(true);
-    setSymbol(e.currentTarget.value);
+    setSymbol(e.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -577,7 +585,7 @@ const AddSymbolForm = (props) => {
     ? (
       <SuggestionsList
         filteredSuggestions={filteredSuggestions}
-        onClick={onClick}
+        onSuggestionClicked={onClick}
         possibleSuggestions={stocksSuggestions}
       />
     )
@@ -630,9 +638,16 @@ const AddSymbolForm = (props) => {
                     </button>
                     <button type="button" onClick={toggleModalOpen}>Cancel</button>
                   </ButtonsContainer>
-                  {isLegalInput
-                  && <h3>Input should be between 2 to 15 charcters letters and numbers only!</h3>}
                 </Form>
+                {isLegalInput
+                  && (
+                    <p>
+                      Input should be between 2 to 15 charcters,
+                      <br />
+                      letters and numbers only!
+                    </p>
+                  )}
+
               </BaseContainer>
             )}
           </Modal>

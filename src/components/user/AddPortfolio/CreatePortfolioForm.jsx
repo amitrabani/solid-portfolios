@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import {
   BaseContainer, ButtonsContainer, Form, FormGroup, Header,
 } from '../../../elements/FormStyles';
-import usePrevious from '../../../hooks/usePrevious';
-import useTypingRestrictions from '../../../hooks/useTypingRestrictions';
+import usePrevious from '../../../hooks/usePreviousStateAndProps';
+import { containIlegalCharacters } from '../../../utils/common';
 import CircularProgress from '../../common/CircularProgress/CircularProgress';
 
 
@@ -16,9 +16,17 @@ const CreatePortfolioForm = (props) => {
   } = props;
   const [portfolioCurrency, setPortfolioCurrency] = useState('USD');
   const [portfolioName, setPortfolioName] = useState('');
+  const [isLegalInput, setIsLegalInput] = useState(false);
+
   const prevFetchingStatus = usePrevious(isFetching);
 
-  const isLegalInput = useTypingRestrictions(portfolioName);
+  useEffect(() => {
+    if (containIlegalCharacters([portfolioName])) {
+      setIsLegalInput(true);
+    } else {
+      setIsLegalInput(false);
+    }
+  }, [portfolioName]);
 
   useEffect(() => {
     if (!isFetching && prevFetchingStatus === true) {
@@ -92,7 +100,14 @@ const CreatePortfolioForm = (props) => {
               </p>
             </>
             )}
-            {isLegalInput && <h3>Bad Naming</h3>}
+            {isLegalInput
+                  && (
+                    <p>
+                      Input should be between 2 to 15 charcters,
+                      <br />
+                      letters and numbers only!
+                    </p>
+                  )}
           </Form>
         </>
       )}

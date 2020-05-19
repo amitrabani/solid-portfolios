@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
@@ -7,9 +7,8 @@ import { LANDING } from '../../../constants/routes';
 import {
   BaseContainer, ButtonsContainer, Form, FormGroup, Header,
 } from '../../../elements/FormStyles';
-import useTypingRestrictions from '../../../hooks/useTypingRestrictions';
+import { containIlegalCharacters } from '../../../utils/common';
 import CircularProgress from '../../common/CircularProgress/CircularProgress';
-
 
 const SignUpForm = (props) => {
   const { auth, signUp } = props;
@@ -20,8 +19,15 @@ const SignUpForm = (props) => {
   const [passwordOne, setPasswordOne] = useState('');
   const [passwordTwo, setPasswordTwo] = useState('');
   const [redirectHome, setRedirectHome] = useState(false);
+  const [isLegalInput, setIsLegalInput] = useState(false);
 
-  const isLegalInput = useTypingRestrictions(username, firstName, lastName);
+  useEffect(() => {
+    if (containIlegalCharacters([username, firstName, lastName])) {
+      setIsLegalInput(true);
+    } else {
+      setIsLegalInput(false);
+    }
+  }, [username, firstName, lastName]);
 
   const handleSignup = (event) => {
     event.preventDefault();
