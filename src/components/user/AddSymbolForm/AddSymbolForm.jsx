@@ -10,7 +10,7 @@ import { containIlegalCharacters } from '../../../utils/common';
 import CircularProgress from '../../common/CircularProgress/CircularProgress';
 import Modal from '../../common/Modal/Modal';
 import SuggestionsList from '../../common/SuggestionsList/SuggestionsList';
-import { Button, Container } from './addSymbolFormSyles';
+import { Button, Container, EmptySuggestionsContainer } from './addSymbolFormSyles';
 import stocksSuggestions from './stocksSuggestions';
 
 const AddSymbolForm = (props) => {
@@ -82,9 +82,9 @@ const AddSymbolForm = (props) => {
       />
     )
     : (
-      <div className="no-suggestions">
+      <EmptySuggestionsContainer>
         <p>No suggestions!</p>
-      </div>
+      </EmptySuggestionsContainer>
     ));
 
 

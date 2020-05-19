@@ -27,3 +27,12 @@ export const Container = styled.div`
   position: absolute;
   z-index: 11;
 `;
+
+export const EmptySuggestionsContainer = styled.div`
+    position: absolute;
+    z-index: 11;
+    display: flex;
+    width: 100%;
+    background: #1f1b24f2;
+    color: white;
+`;
