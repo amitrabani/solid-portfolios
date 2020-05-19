@@ -30,8 +30,10 @@ const SignInForm = (props) => {
   const isInvalid = password === '' || email === '';
   let error = auth.authError;
 
+  // firestore return bad error messages,
+  // need to create a user-customized error messages util
   if (error === "Cannot read property 'uid' of null") {
-    error = 'Network Connection Error';
+    error = 'General Error';
   }
 
   return (
