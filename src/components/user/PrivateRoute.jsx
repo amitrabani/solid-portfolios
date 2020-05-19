@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { getAuth } from '../../redux/selectors';
 import Modal from '../common/Modal/Modal';
-import LoginManagement from './LoginManagement/LoginManagement';
+import UserAuthManager from './UserAuthManager/UserAuthManager ';
 
 
 const PrivateRoute = (props) => {
@@ -26,7 +26,7 @@ const PrivateRoute = (props) => {
           style={{ backgroundColor: '£fcc117e3' }}
           onClose={toggleModalOpen}
         >
-          <LoginManagement />
+          <UserAuthManager />
         </Modal>
         )}
       </div>
