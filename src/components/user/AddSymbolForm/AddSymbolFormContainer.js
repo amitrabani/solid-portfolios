@@ -5,10 +5,10 @@ import store from '../../../redux/store';
 import AddSymbolForm from './AddSymbolForm';
 
 const mapStateToProps = () => {
-  const { fetchingSymbolsError, isFetchingSymbols } = store.getState().portfolios;
+  const { fetchingSymbolsError, isLoadingSymbols } = store.getState().portfolios;
   return {
     fetchError: fetchingSymbolsError,
-    isFetching: isFetchingSymbols,
+    isLoading: isLoadingSymbols,
   };
 };
 const mapDispatchToProps = { addSymbol };

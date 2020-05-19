@@ -11,7 +11,7 @@ import {
 const initialState = {
   isLoadingPortfolios: false,
   fetchingPortfoliosError: false,
-  isFetchingSymbols: false,
+  isLoadingSymbols: false,
   fetchingSymbolsError: false,
   portfolios: [],
 };
@@ -36,12 +36,12 @@ export default (state = initialState, action) => {
     case START_FETCHING_SYMBOLS:
       return {
         ...state,
-        isFetchingSymbols: true,
+        isLoadingSymbols: true,
         fetchingSymbolsError: false,
       };
 
     case DONE_FETCHING_SYMBOLS:
-      return { ...state, isFetchingSymbols: false };
+      return { ...state, isLoadingSymbols: false };
 
     case FETCHING_SYMBOLS_ERROR:
       return { ...state, fetchingSymbolsError: action.error };

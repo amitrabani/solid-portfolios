@@ -11,10 +11,10 @@ import CircularProgress from '../../common/CircularProgress/CircularProgress';
 import Modal from '../../common/Modal/Modal';
 import SuggestionsList from '../../common/SuggestionsList/SuggestionsList';
 import { Button, Container } from './addSymbolFormSyles';
-import stocksSuggestions from './stocksSuggestions'
+import stocksSuggestions from './stocksSuggestions';
 
 const AddSymbolForm = (props) => {
-  const { isFetching, portfolioName, addSymbol } = props;
+  const { isLoading, portfolioName, addSymbol } = props;
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
@@ -23,7 +23,7 @@ const AddSymbolForm = (props) => {
   const [symbol, setSymbol] = useState('');
   const [isLegalInput, setIsLegalInput] = useState(false);
 
-  const prevFetchingStatus = usePrevious(isFetching);
+  const prevFetchingStatus = usePrevious(isLoading);
 
   useEffect(() => {
     if (containIlegalCharacters([symbol])) {
@@ -34,10 +34,10 @@ const AddSymbolForm = (props) => {
   }, [symbol]);
 
   useEffect(() => {
-    if (!isFetching && prevFetchingStatus === true) {
+    if (!isLoading && prevFetchingStatus === true) {
       setModalOpen(false);
     }
-  }, [isFetching, symbol, prevFetchingStatus]);
+  }, [isLoading, symbol, prevFetchingStatus]);
 
   const toggleModalOpen = () => {
     setModalOpen(!isModalOpen);
@@ -95,7 +95,7 @@ const AddSymbolForm = (props) => {
       {isModalOpen && (
         <div>
           <Modal onClose={() => setModalOpen(false)}>
-            { isFetching ? (
+            { isLoading ? (
               <CircularProgress />
             ) : (
               <BaseContainer>
