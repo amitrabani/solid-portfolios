@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { smallScreenWidth } from '../../../elements/consts';
+import scrollBarStyles from '../../../elements/ScrollBarStyles';
 import Theme from '../../../elements/Theme';
 
 export const CardsContainer = styled.div`
@@ -16,16 +18,8 @@ export const CardsContainer = styled.div`
       color: ${Theme.primaryColor};
     }
   }
-  &::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: ${Theme.primaryColor};
-    border-radius: 2em;
-    outline: 1px solid slategrey;
-  }
-  @media (max-width: 768px) {
+  ${scrollBarStyles}
+  @media (max-width: ${smallScreenWidth}) {
     article {
       margin: 1em;
     }
@@ -53,9 +47,7 @@ export const CardImg = styled.img`
   float: left;
   margin-right: 1em;
 `;
-export const CardBottom = styled.span`
-  display: flex;
-`;
+
 export const CardSentiment = styled.span`
   float: left;
   margin: 5px;
