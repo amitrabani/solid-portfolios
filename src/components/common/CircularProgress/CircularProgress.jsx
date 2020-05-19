@@ -1,12 +1,13 @@
 import React from 'react';
-import './circularProgressStyles.css';
+
+import { Container, CircularLoader } from './circularProgressStyles';
 
 
 const CircularProgress = () => (
   <div style={{ margin: '11em' }}>
-    <div className="profile-main-loader">
+    <Container>
       <div className="loader">
-        <svg className="circular-loader" viewBox="25 25 50 50">
+        <CircularLoader viewBox="25 25 50 50">
           <circle
             className="loader-path"
             cx="50"
@@ -16,9 +17,9 @@ const CircularProgress = () => (
             stroke="#fcc117e3"
             strokeWidth="3"
           />
-        </svg>
+        </CircularLoader>
       </div>
-    </div>
+    </Container>
   </div>
 );
 export default CircularProgress;
