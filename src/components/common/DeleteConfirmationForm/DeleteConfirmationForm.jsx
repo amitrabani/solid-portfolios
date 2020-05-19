@@ -15,9 +15,8 @@ const DeleteConfirmationForm = (props) => {
     <>
       <BaseContainer>
         <Form onSubmit={handleDelete}>
-          <Header style={{ color: 'black ' }}>Are You Sure?</Header>
+          <Header>Are You Sure?</Header>
           <p style={{ color: 'red' }}>
-            {' '}
             This Action Will Permenently Delete The Portfolio
           </p>
           <ButtonsContainer>
