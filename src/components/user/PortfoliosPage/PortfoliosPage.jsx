@@ -5,8 +5,7 @@ import PropTypes, { object } from 'prop-types';
 import Snackbar from '../../common/snackbar/Snackbar';
 import AddPortfolio from '../AddPortfolio/CreatePortfolioButton';
 import PortfoliosListContainer from '../PortfoliosList/PortfoliosListContainer';
-import PortfoliosHeader from './portfoliosPageStyles';
-
+import Header from './portfoliosPageStyles';
 
 const PortfoliosPage = (props) => {
   const {
@@ -26,7 +25,7 @@ const PortfoliosPage = (props) => {
       {fetchError && <Snackbar message="Failed Getting Portfolios" />}
       <hr />
       <AddPortfolio />
-      <PortfoliosHeader>My Portfolios:</PortfoliosHeader>
+      <Header>My Portfolios:</Header>
       {isFetchingPortfolios ? (
         <h1>Fetching</h1>
       ) : (
