@@ -17,7 +17,7 @@ import { Container, Header } from './portfoliosListStyles';
 const PortfoliosList = (props) => {
   const { deletePortfolio, portfolios } = props;
   const { portfolios: portfoliosList } = portfolios;
-  const [portfolioToDelete, setPortfolioToDelete] = useState(null);
+  const [portfolioToDelete, setPortfolioToDelete] = useState(false);
 
   const handleDelete = () => {
     deletePortfolio(portfolioToDelete);
@@ -27,7 +27,7 @@ const PortfoliosList = (props) => {
   return (
     <Container>
       <Header>RM:don`t leave your portfolios empty, add stocks now!</Header>
-      {Object.keys(portfoliosList) && !!Object.keys(portfoliosList).length && (
+      {Object.keys(portfoliosList) && Object.keys(portfoliosList).length !== 0 && (
         <Table>
           <thead>
             <tr>
@@ -37,8 +37,8 @@ const PortfoliosList = (props) => {
             </tr>
           </thead>
           <tbody>
-            {Object.keys(portfoliosList).map((index) => (
-              <tr key={index}>
+            {Object.keys(portfoliosList).map((key) => (
+              <tr key={key}>
                 <td
                   style={{
                     cursor: 'hand',
@@ -49,18 +49,18 @@ const PortfoliosList = (props) => {
                   <Link
                     style={{ color: `${Theme.primaryColor}` }}
                     to={{
-                      pathname: `${PORTFOLIOS}/${portfoliosList[index].name}`,
-                      state: { index },
+                      pathname: `${PORTFOLIOS}/${portfoliosList[key].name}`,
+                      state: { index: key },
                     }}
                   >
-                    {portfoliosList[index].name}
+                    {portfoliosList[key].name}
                   </Link>
                 </td>
-                <td>{portfoliosList[index].stocks.length}</td>
-                <td>{portfoliosList[index].currency}</td>
+                <td>{portfoliosList[key].stocks.length}</td>
+                <td>{portfoliosList[key].currency}</td>
                 <td>
                   <DeleteButton
-                    onClick={() => setPortfolioToDelete(portfoliosList[index].name)}
+                    onClick={() => setPortfolioToDelete(portfoliosList[key].name)}
                   >
                     <img alt="Delete Symbol" className="regularIcon" src={deleteForeverIcon} />
                     <img alt="Delete Symbol" className="hoverIcon" src={deleteForeverIconHover} />
