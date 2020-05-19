@@ -14,21 +14,22 @@ export const fetchQuote = (symbol) => axios
     },
   )
   .then((response) => {
-    if (response.data === 'Symbol not supported') {
-      throw new Error(response.data);
+    const { data } = response;
+    if (data === 'Symbol not supported') {
+      throw new Error(data);
     } else {
       const quote = {
-        current: response.data.c,
-        todaysHigh: response.data.h,
-        todaysLow: response.data.l,
-        previeousClose: response.data.pc,
+        current: data.c,
+        todaysHigh: data.h,
+        todaysLow: data.l,
+        previeousClose: data.pc,
         id: shortid.generate(),
         symbol,
       };
       return quote;
     }
   })
-  .catch((error) => error);
+  .catch((error) => { throw new Error(error); });
 
 export const fetchMarketNews = () => axios
   .get('https://finnhub.io/api/v1/news/?token=bqhk217rh5rdcs9r2h30')
