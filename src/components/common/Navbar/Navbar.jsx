@@ -7,7 +7,7 @@ import {
   ABOUT, BLOG, LANDING, PORTFOLIOS,
 } from '../../../constants/routes';
 import useComponentVisible from '../../../hooks/useComponentVisable';
-import useLayoutSize from '../../../hooks/useLayoutSize';
+import useWideMode from '../../../hooks/useWideMode';
 import Login from '../Login/Login';
 import {
   AppHeader, Container, LinksContainer, List, SettingsButton,
@@ -17,20 +17,16 @@ import UserDropDownContainer from './UserDropdown/UserDropDownContainer';
 
 const Navbar = (props) => {
   const { auth } = props;
-  const [isWideMode, setWideMode] = useState(false);
-  const [width] = useLayoutSize();
+  const isWideMode = useWideMode();
   const { isComponentVisible, setIsComponentVisible } = useComponentVisible(
     true,
   );
 
   useEffect(() => {
-    if (width < 730) {
-      setWideMode(false);
-    } else {
+    if (!isWideMode) {
       setIsComponentVisible(true);
-      setWideMode(true);
     }
-  }, [width]);
+  }, [isWideMode]);
 
   const toggleOpen = () => {
     setIsComponentVisible(!isComponentVisible);
