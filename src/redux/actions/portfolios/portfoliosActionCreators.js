@@ -49,12 +49,8 @@ export const addSymbol = (amount, symbol, portfolioName) => (dispatch) => {
   const { uid } = store.getState().auth;
   fetchQuote(symbol)
     .then((response) => {
-      if (response instanceof Error) {
-        throw new Error(response);
-      } else {
-        const quote = { ...response, shares: amount };
-        addSymbolToFirestorePortfolio(uid, portfolioName, quote);
-      }
+      const quote = { ...response, shares: amount };
+      addSymbolToFirestorePortfolio(uid, portfolioName, quote);
     })
     .catch((error) => {
       dispatch(setError(FETCHING_SYMBOLS_ERROR, error.message));
