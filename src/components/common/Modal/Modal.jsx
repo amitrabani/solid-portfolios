@@ -16,9 +16,8 @@ const Modal = (props) => {
 
   return (
     isComponentVisible && (
-      <ModalContainer id="modalContainer">
-        {' '}
-        <ModalContent id="content" ref={ref}>
+      <ModalContainer className="modalContainer">
+        <ModalContent className="content" ref={ref}>
           {children}
         </ModalContent>
       </ModalContainer>
