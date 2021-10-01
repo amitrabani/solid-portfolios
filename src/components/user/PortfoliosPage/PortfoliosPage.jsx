@@ -1,46 +1,46 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 
-import PropTypes, { object } from 'prop-types';
+import PropTypes, {object} from 'prop-types';
 
 import Snackbar from '../../common/snackbar/Snackbar';
 import AddPortfolio from '../AddPortfolio/CreatePortfolioButton';
-import PortfoliosListContainer from '../PortfoliosList/PortfoliosListContainer';
+import PortfoliosList from '../PortfoliosList/PortfoliosList';
 import Header from './portfoliosPageStyles';
+import {useDispatch, useSelector} from "react-redux";
 
 const PortfoliosPage = (props) => {
-  const {
-    portfolios = {},
-    fetchError,
-    isLoadingPortfolios,
-    fetchPortfolios,
-  } = props;
-  useEffect(() => {
-    if (portfolios.length === 0) {
-      fetchPortfolios();
-    }
-  }, []);
+    const portfolios = useSelector(state => state.portfolios)
+    const fetchError = portfolios.fetchError
+    const isLoadingPortfolios = portfolios.isLoadingPortfolios
+    const fetchPortfolios = portfolios.fetchPortfolios
+    const dispatch = useDispatch()
 
-  return (
-    <div>
-      {fetchError && <Snackbar message="Failed Getting Portfolios" />}
-      <hr />
-      <AddPortfolio />
-      <Header>My Portfolios:</Header>
-      {isLoadingPortfolios ? (
-        <h1>Fetching</h1>
-      ) : (
-        <PortfoliosListContainer portfolios={portfolios} />
-      )}
-    </div>
-  );
+    useEffect(() => {
+        if (portfolios.length === 0) {
+            dispatch(fetchPortfolios());
+        }
+    }, [fetchPortfolios]);
+
+    return (
+        <div>
+            {fetchError && <Snackbar message="Failed Getting Portfolios"/>}
+            <hr/>
+            <AddPortfolio/>
+            <Header>My Portfolios:</Header>
+            {isLoadingPortfolios ? (
+                <h1>Fetching</h1>
+            ) : (
+                <PortfoliosList portfolios={portfolios}/>
+            )}
+        </div>
+    );
 };
 
 PortfoliosPage.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  fetchError: PropTypes.any.isRequired,
-  fetchPortfolios: PropTypes.func.isRequired,
-  isLoadingPortfolios: PropTypes.bool,
-  portfolios: PropTypes.arrayOf(object),
+    // eslint-disable-next-line react/forbid-prop-types
+    fetchError: PropTypes.any.isRequired,
+    fetchPortfolios: PropTypes.func.isRequired,
+    portfolios: PropTypes.arrayOf(object),
 };
 
 
