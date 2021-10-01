@@ -15,21 +15,17 @@ import PrivateRoute from './components/user/PrivateRoute';
 import * as ROUTES from './constants/routes';
 import {useDispatch, useSelector} from "react-redux";
 import {setUserSignedInSuccess} from './redux/actions/auth/authActions';
-import {fetchPortfolios} from './redux/actions/portfolios/portfoliosActionCreators';
 
 function App() {
     const dispatch = useDispatch()
     const auth = useSelector(state => state.auth)
-
     const uid = localStorage.getItem('uid');
-
 
     useEffect(() => {
         if (!auth.uid) {
             dispatch(setUserSignedInSuccess(uid));
-            dispatch(fetchPortfolios());
         }
-    }, [auth.uid]);
+    }, [auth.uid,dispatch,uid]);
 
     return (
         <Router>
