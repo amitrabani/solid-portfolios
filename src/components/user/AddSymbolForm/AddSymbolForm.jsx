@@ -154,7 +154,6 @@ const AddSymbolForm = ({portfolioName}) => {
 AddSymbolForm.propTypes = {
     isFetching: PropTypes.bool,
     portfolioName: PropTypes.string.isRequired,
-    addSymbol: PropTypes.func.isRequired,
 };
 
 

@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 
 import {BaseContainer, ButtonsContainer, Form, Header,} from '../../../elements/FormStyles';
 
-const DeleteConfirmationForm = (props) => {
-    const {onClose, handleDelete} = props;
+const DeleteConfirmationForm = ({onClose, handleDelete}) => {
     return (
         <>
             <BaseContainer>

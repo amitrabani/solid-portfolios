@@ -25,7 +25,7 @@ function App() {
         if (!auth.uid) {
             dispatch(setUserSignedInSuccess(uid));
         }
-    }, [auth.uid,dispatch,uid]);
+    }, [auth.uid, dispatch, uid]);
 
     return (
         <Router>
@@ -61,9 +61,7 @@ function App() {
 App.propTypes = {
     auth: PropTypes.shape({
         uid: PropTypes.any,
-    }),
-    fetchPortfolios: PropTypes.func.isRequired,
-    signIn: PropTypes.func.isRequired,
+    })
 };
 
 export default App;

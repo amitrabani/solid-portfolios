@@ -12,7 +12,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 const tableHeaders = ['Symbol', 'Price', 'Shares', 'Value', 'Day Range', 'Buy/Sell', 'Currency'];
 
-const PortfolioManagement = (props) => {
+const PortfolioManagement = () => {
     const portfolios = useSelector(state => state.portfolios)
     const dispatch = useDispatch()
     const {portfolios: portfoliosList} = portfolios;
@@ -128,8 +128,6 @@ PortfolioManagement.propTypes = {
         fetchingSymbolsError: PropTypes.bool,
         portfolios: PropTypes.arrayOf(object) || false.isRequired,
     }),
-    deleteSymbols: PropTypes.func.isRequired,
-    fetchPortfolios: PropTypes.func.isRequired,
 };
 
 export default PortfolioManagement;

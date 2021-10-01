@@ -10,7 +10,9 @@ import CircularProgress from '../../common/CircularProgress/CircularProgress';
 import {signUp} from "../../../redux/actions/auth/authActionCreators";
 import {useDispatch, useSelector} from "react-redux";
 
-const SignUpForm = (props) => {
+const SignUpForm = () => {
+    const dispatch = useDispatch()
+    const auth = useSelector(state => state.auth)
     const [username, setUsername] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -19,9 +21,6 @@ const SignUpForm = (props) => {
     const [passwordTwo, setPasswordTwo] = useState('');
     const [redirectHome, setRedirectHome] = useState(false);
     const [isLegalInput, setIsLegalInput] = useState(false);
-
-    const auth = useSelector(state => state.auth)
-    const dispatch = useDispatch()
 
 
     useEffect(() => {
